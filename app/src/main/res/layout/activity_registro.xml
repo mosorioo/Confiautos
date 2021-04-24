@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Registro">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="146dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/logoapp"
+            app:layout_constraintBottom_toTopOf="@+id/textRegistroPersona"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textRegistroPersona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/registroUsuario"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/regUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+        <EditText
+            android:id="@+id/regUsuario"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:hint="@string/nombre_de_usuario"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/regPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textRegistroPersona"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/regPassword"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="none|textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/regConfPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regUsuario"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/regConfPassword"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/confirmar_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/regNombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regPassword" />
+
+        <EditText
+            android:id="@+id/regNombre"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/nombre"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/regApellido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regConfPassword"
+            app:layout_constraintVertical_bias="1.0"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/regApellido"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/apellido"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/regNroTelefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regNombre" />
+
+        <EditText
+            android:id="@+id/regNroTelefono"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/nro_de_telefono"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/regEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regApellido" />
+
+        <EditText
+            android:id="@+id/regEmail"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="150dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="none|textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regNroTelefono" />
+
+        <Button
+            android:id="@+id/btnRegRegistrar"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="85dp"
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:text="@string/registrar"
+            android:textColor="#A62A2A"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRegVolver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+
+        <Button
+            android:id="@+id/btnRegVolver"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="85dp"
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:text="@string/volver"
+            android:textColor="#A62A2A"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnRegRegistrar"
+            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

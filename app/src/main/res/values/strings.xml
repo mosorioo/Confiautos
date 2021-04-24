@@ -1,3 +1,44 @@
 <resources>
     <string name="app_name">Confiautos</string>
+    <string name="recuperar_password">Olvidé mi password</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="todo">TODO</string>
+    <string name="apellido">Apellidos</string>
+    <string name="password">Password</string>
+    <string name="nombre">Nombre</string>
+    <string name="registroUsuario">Registro de Usuario</string>
+    <string name="confirmar_password">Confirmar Password</string>
+    <string name="nro_de_telefono">Nro. de Teléfono</string>
+    <string name="nro_de_documento">Nro. de Documento</string>
+    <string name="tipo_de_documento">Tipo de Documento:</string>
+    <string name="email">E-mail</string>
+    <string name="registrar">Registrar</string>
+    <string name="volver">Volver</string>
+    <string name="nombre_de_usuario">Usuario</string>
+    <string name="logoapp">logoapp</string>
+    <string name="actualizar_datos_personales">Actualizar Datos Personales</string>
+    <string name="abrirCamara">Camara</string>
+    <string name="galeria">Galeria</string>
+    <string name="beneficios">BENEFICIOS</string>
+    <string name="mis_turnos">MIS TURNOS</string>
+    <string name="solicitar_turno">Solicitar Turno</string>
+    <string name="nosotros">NOSOTROS</string>
+    <string name="mis_autos">MIS AUTOS</string>
+    <string name="mi_perfil">MI PERFIL</string>
+    <string name="cerrar_sesion">CERRAR SESIÓN</string>
+    <string name="info_nosotros">Somos un taller especializado en amortiguadores, diagnóstico,
+        discos de frenos, distribuciones, embragues y muchas áreas más.
+        Con nosotros podras estar confiado de que los trabajos realizados serán de la mejor calidad.</string>
+    <string name="ubicacion">Estamos ubicados en:</string>
+    <string name="direccion_taller"> Bartolomé Mitre 970, C1036 AAR, Buenos Aires</string>
+    <string name="acerca_nosotros">Acerca de nosotros</string>
+    <string name="contacto">Contactanos:</string>
+    <string name="telefono">+5191125401109</string>
+    <string name="nuestras_redes">Redes Sociales:</string>
+    <string name="bienvenido_usuario">¡Bienvenido! Usuario</string>
+    <string name="usuario">Usuario:</string>
+    <string name="guardar">Guardar</string>
+    <string name="icoWhatsApp">icoWhatsApp</string>
+    <string name="icoInstagram">IcoInstagram</string>
 </resources>

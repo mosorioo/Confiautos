@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Inicio">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="149dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="138dp"
+            android:layout_marginBottom="29dp"
+            android:contentDescription="@string/logoapp"
+            app:layout_constraintBottom_toTopOf="@+id/txtNombreUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/txtNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="267dp"
+            android:layout_marginBottom="49dp"
+            android:text="@string/bienvenido_usuario"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnNosotros"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+        <Button
+            android:id="@+id/btnNosotros"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/nosotros"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnTurnoNuevo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreUsuario" />
+
+        <Button
+            android:id="@+id/btnTurnoNuevo"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/solicitar_turno"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnMisTurnos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnNosotros" />
+
+        <Button
+            android:id="@+id/btnMisTurnos"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/mis_turnos"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnMisAutos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTurnoNuevo" />
+
+        <Button
+            android:id="@+id/btnBeneficios"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/beneficios"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMiPerfil" />
+
+        <Button
+            android:id="@+id/btnMisAutos"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/mis_autos"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnMiPerfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMisTurnos" />
+
+        <Button
+            android:id="@+id/btnMiPerfil"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/mi_perfil"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnBeneficios"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMisAutos" />
+
+        <Button
+            android:id="@+id/btnSalir"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="44dp"
+            android:text="@string/cerrar_sesion"
+            android:textColor="#CA1717"
+            android:textColorHighlight="#BFB8B8"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBeneficios" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
