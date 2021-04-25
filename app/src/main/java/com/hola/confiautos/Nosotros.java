@@ -19,6 +19,7 @@ public class Nosotros extends AppCompatActivity {
         btnVolver = (Button) findViewById((R.id.btnVolver));
     }
 
+    //Metodo para el boton Volver, este regresa a Inicio
     public void Volver(View view) {
         Intent i = new Intent(Nosotros.this, Inicio.class);
         startActivity(i);

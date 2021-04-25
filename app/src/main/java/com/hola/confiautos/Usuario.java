@@ -1,5 +1,6 @@
 package com.hola.confiautos;
 
+//Tabla Usuario, aqui se guardan los datos de cada usuario
 public class Usuario {
     int Id;
     String Usuario, Password, Nombre, Apellidos, NroTelefono, Email;

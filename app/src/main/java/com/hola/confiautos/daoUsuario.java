@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+//Esta clase sirve para acceder a la base de datos
+
 public class daoUsuario {
     Context c;
     Usuario u;

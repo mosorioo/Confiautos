@@ -36,6 +36,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    //Metodo para el boton Volver, este regresa a Inicio
     public void Volver(View view) {
         Intent i = new Intent(MiPerfil.this, Inicio.class);
         startActivity(i);

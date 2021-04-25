@@ -40,25 +40,33 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         }
 
+    //Metodo para el boton Nosotros
     public void InfoNosotros(View view) {
         Intent i = new Intent(Inicio.this, Nosotros.class);
         startActivity(i);
         finish();
     }
 
+    //Metodo para el boton MiPerfil
     public void MisDatos (View view) {
         Intent i1 = new Intent(Inicio.this, MiPerfil.class);
         startActivity(i1);
         finish();
     }
 
+    //Metodo para el boton Salir
     public void CerrarApp(View view) {
-        Intent i6 = new Intent(Intent.ACTION_MAIN);
+       /* Otro intent para cerrar la app, funciona raro
+       Intent i6 = new Intent(Intent.ACTION_MAIN);
         getIntent().addCategory(Intent.CATEGORY_HOME);
         getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i6);
         finish();
-    }
 
+        */
+        Intent i6 = new Intent(Inicio.this, MainActivity.class); //Me lleva al login
+        getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+        startActivity(i6);
+    }
 
 }
