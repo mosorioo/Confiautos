@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hola.confiautos.entidades.Usuario;
+import com.hola.confiautos.services.daoUsuario;
+
 public class Registro extends AppCompatActivity implements View.OnClickListener {
     EditText us, pas, nom, ape, docu, tel, email; // tdocu,
     Button reg, volv;

@@ -2,12 +2,14 @@ package com.hola.confiautos;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.FillEventHistory;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hola.confiautos.entidades.Usuario;
+import com.hola.confiautos.services.daoUsuario;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
     Button btnTurnoNuevo, btnMisTurnos, btnNosotros, btnBeneficios, btnMisAutos, btnMiPerfil, btnSalir;
@@ -56,17 +58,20 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
     //Metodo para el boton Salir
     public void CerrarApp(View view) {
-       /* Otro intent para cerrar la app, funciona raro
-       Intent i6 = new Intent(Intent.ACTION_MAIN);
+       // Otro intent para cerrar la app, funciona raro
+      /* Intent i6 = new Intent(Intent.ACTION_MAIN);
         getIntent().addCategory(Intent.CATEGORY_HOME);
         getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i6);
         finish();
-
         */
+        //Con este cierro la app completamente.
+        finish();
+        System.exit(0);
+        /*
         Intent i6 = new Intent(Inicio.this, MainActivity.class); //Me lleva al login
         getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
-        startActivity(i6);
+        startActivity(i6); */
     }
 
 }

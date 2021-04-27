@@ -1,4 +1,4 @@
-package com.hola.confiautos;
+package com.hola.confiautos.entidades;
 
 //Tabla Usuario, aqui se guardan los datos de cada usuario
 public class Usuario {

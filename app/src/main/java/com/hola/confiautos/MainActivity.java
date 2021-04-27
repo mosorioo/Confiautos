@@ -8,6 +8,8 @@ import android.content.Intent;
         import android.widget.Toast;
         import androidx.appcompat.app.AppCompatActivity;
 
+import com.hola.confiautos.services.daoUsuario;
+
 import static com.hola.confiautos.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

@@ -1,8 +1,10 @@
-package com.hola.confiautos;
+package com.hola.confiautos.services;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.hola.confiautos.entidades.Usuario;
 
 import java.util.ArrayList;
 
@@ -34,7 +36,7 @@ public class daoUsuario {
             cv.put("email", u.getEmail());
             return (sql.insert("usuario", null, cv) > 0);
         } else{
-            return false; //significa que no puede insertarse en la base pro ya existir
+            return false; //significa que no puede insertarse en la base por ya existir
         }
     }
 
