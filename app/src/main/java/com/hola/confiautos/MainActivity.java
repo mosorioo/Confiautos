@@ -1,6 +1,63 @@
 package com.hola.confiautos;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.hola.confiautos.services.daoUsuario;
+
+import static com.hola.confiautos.R.*;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText usuario, password;
+    Button btnLogin, btnRegistrarse;
+    //daoUsuario dao;
+    daoUsuario dao = new daoUsuario();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(layout.activity_main);
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1); //El 1 corresponde a la version de la BD
+        usuario = (EditText) findViewById(id.txtLoginUser);//para enlazarlos
+        password = (EditText) findViewById(id.txtLoginPassword);
+        btnLogin = (Button) findViewById(id.btnLogin);
+        btnRegistrarse = (Button) findViewById(id.btnRegistrarse);
+        btnLogin.setOnClickListener(this); //asigno los eventos
+        btnRegistrarse.setOnClickListener(this);
+        //dao=new daoUsuario(this);
+
+        btnRegistrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Registro.class);
+                startActivity(i);
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(MainActivity.this, Inicio.class);
+                startActivity(i1);
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+}
+/*
+//Antiguo Main
+import android.content.Intent;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.Button;
@@ -27,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogin.setOnClickListener(this); //asigno los eventos
         btnRegistrarse.setOnClickListener(this);
         dao=new daoUsuario(this);
-    }
+      }
 
     @Override
     public void onClick(View v) {
@@ -55,5 +112,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 }
+*/
