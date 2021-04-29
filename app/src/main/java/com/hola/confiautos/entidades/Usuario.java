@@ -24,6 +24,10 @@ public class Usuario {
     public Usuario(String s, String toString, String string, String s1, String toString1, String string1) {
     }
 
+    public Usuario() {
+
+    }
+
     //Getters y Setters
     public Integer getId() {
         return id;

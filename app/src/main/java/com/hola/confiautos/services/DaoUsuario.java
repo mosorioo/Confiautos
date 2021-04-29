@@ -15,8 +15,8 @@ import java.util.Collection;
 
 public class DaoUsuario {
 
-    public void create(Usuario usuario, Context context) {
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
+    public void createUsuario (Usuario usuario, View.OnClickListener context) {
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
 
         SQLiteDatabase db = conn.getWritableDatabase();
         String insert = "INSERT INTO " + Utilidades.TABLA_USUARIO + "(" + Utilidades.USUARIO + ", " + Utilidades.PASSWORD + ", " + Utilidades.NOMBRE + ", " + Utilidades.APELLIDO + ", " + Utilidades.TELEFONO + ", " + Utilidades.EMAIL + ") " +
@@ -54,6 +54,7 @@ public class DaoUsuario {
         return usuario;
     }
 
+    //Devuelve el usuario que encuentra o null
     public Usuario getUserbyUsuarioAndPass(String user, String pass, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
@@ -65,6 +66,7 @@ public class DaoUsuario {
         return null;
     }
 
+    //
     public Usuario getUserbyID(int id, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
@@ -77,7 +79,8 @@ public class DaoUsuario {
     }
 
     public Integer validarUsuario (Usuario usuario, View.OnClickListener context){
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
+      //  ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
         Integer exist;
         Cursor c = db.rawQuery("SELECT COUNT (" +Utilidades.USUARIO + ") FROM "+Utilidades.TABLA_USUARIO + "WHERE USUARIO = '" + usuario.getUsuario().toString() + "'", null);

@@ -6,17 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hola.confiautos.services.daoUsuario;
+import com.hola.confiautos.entidades.Usuario;
+import com.hola.confiautos.services.DaoUsuario;
 
 import static com.hola.confiautos.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText usuario, password;
     Button btnLogin, btnRegistrarse;
-    //daoUsuario dao;
-    daoUsuario dao = new daoUsuario();
+    DaoUsuario dao = new DaoUsuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password = (EditText) findViewById(id.txtLoginPassword);
         btnLogin = (Button) findViewById(id.btnLogin);
         btnRegistrarse = (Button) findViewById(id.btnRegistrarse);
-        btnLogin.setOnClickListener(this); //asigno los eventos
-        btnRegistrarse.setOnClickListener(this);
-        //dao=new daoUsuario(this);
+        //btnLogin.setOnClickListener(this); //asigno los eventos
+        //btnRegistrarse.setOnClickListener(this);
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,10 +42,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String user = usuario.getText().toString();
+                String pass = password.getText().toString();
+                if (user.equals("") && pass.equals(""))
+                    Toast.makeText(MainActivity.this, "ERROR: campos vacios", Toast.LENGTH_SHORT).show();
+                else {
+                    //Usuario usuario = DaoUsuario(user, pass, MainActivity.this);
+                    Usuario usuario = dao.getUserbyUsuarioAndPass(user, pass, MainActivity.this);
+                    if (usuario == null) {
+                        Toast.makeText(MainActivity.this, "Usuario y/o Password incorrectos", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent i2 = new Intent(MainActivity.this, Inicio.class);
+                        i2.putExtra("Id", usuario.getId());
+                        ((EditText) findViewById(id.regUsuario)).setText("");
+                        ((EditText) findViewById(id.regPassword)).setText("");
+                        startActivity(i2);
+            /*@Override
+            public void onClick(View v) {
                 Intent i1 = new Intent(MainActivity.this, Inicio.class);
                 startActivity(i1);
             }
+        });*/
+
+                    }
+                }
+            }
         });
+
 
     }
 
@@ -53,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
     }
-
 }
 /*
 //Antiguo Main

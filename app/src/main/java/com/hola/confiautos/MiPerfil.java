@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.hola.confiautos.services.daoUsuario;
+import com.hola.confiautos.services.DaoUsuario;
 
 public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
 
     EditText us, pas, nom, ape, tel, email;
     Button guard, volv;
-    daoUsuario dao;
+    DaoUsuario dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

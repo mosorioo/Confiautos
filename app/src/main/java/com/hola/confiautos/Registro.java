@@ -1,7 +1,7 @@
 package com.hola.confiautos;
+// 2do intento
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
-import com.hola.confiautos.utilidades.Utilidades;
 
-public class Registro extends AppCompatActivity {
+public class Registro extends AppCompatActivity implements View.OnClickListener {
     EditText us, pas, confpas, nom, ape, tel, email;
-    Button reg, volv;
+    Button btnReg, btnVolv;
     DaoUsuario dao = new DaoUsuario();
 
     @Override
@@ -30,53 +29,73 @@ public class Registro extends AppCompatActivity {
         ape = (EditText) findViewById(R.id.regApellido);
         tel = (EditText) findViewById(R.id.regNroTelefono);
         email = (EditText) findViewById(R.id.regEmail);
+        btnReg = findViewById(R.id.btnRegRegistrar);
+        btnVolv = findViewById(R.id.btnVolver);
 
         // reg = (Button) findViewById(R.id.btnRegRegistrar);
         // volv = (Button) findViewById(R.id.btnRegVolver);
         // reg.setOnClickListener((View.OnClickListener) this);
         // volv.setOnClickListener((View.OnClickListener) this);
 
-        reg = findViewById(R.id.btnRegRegistrar);
-        reg.setOnClickListener(new View.OnClickListener(){
-
+        btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 registrarUsuario();
             }
+        });
 
-            private void registrarUsuario(){
-                Usuario usuario =new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString());
-                Integer existe = dao.validarUsuario (usuario, this);
-                if (existe>0) {
-                    Toast.makeText(this,"USUARIO YA REGISTRADO", Toast.LENGTH_LONG).show();
-
-                    ((EditText) findViewById(R.id.ETNombre)).setText("");
-                    ((EditText) findViewById(R.id.ETRepetirPass)).setText("");
-                    ((EditText) findViewById(R.id.ETEmail)).setText("");
-                    ((EditText) findViewById(R.id.ETPassword2)).setText("");
-                    ((EditText) findViewById(R.id.ETUsuario2)).setText("");
-                }
-                else{
-                    usuarioService.create(usuario, this);
-                    Toast.makeText(this, "Usuario creado", Toast.LENGTH_LONG).show();
-                    ((EditText) findViewById(R.id.ETNombre)).setText("");
-                    ((EditText) findViewById(R.id.ETRepetirPass)).setText("");
-                    ((EditText) findViewById(R.id.ETEmail)).setText("");
-                    ((EditText) findViewById(R.id.ETPassword2)).setText("");
-                    ((EditText) findViewById(R.id.ETUsuario2)).setText("");
-                    Intent i1 = new Intent(RegistroActivity.this, MainActivity.class);
-                    startActivity(i1);
-                }
-
+    /*    btnVolv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volver();
             }
+        });¨*/
 
 
+    }
+
+    private void volver() {
+        Intent i1 = new Intent(Registro.this, MainActivity.class);
+        startActivity(i1);
+        finish();
+    }
+
+    private void registrarUsuario() {
+        Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString());
+        Integer existe = dao.validarUsuario(usuario, this);
+        if (existe > 0) {
+            Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
+            ((EditText) findViewById(R.id.regUsuario)).setText("");
+            ((EditText) findViewById(R.id.regPassword)).setText("");
+            ((EditText) findViewById(R.id.regNombre)).setText("");
+            ((EditText) findViewById(R.id.regApellido)).setText("");
+            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
+            ((EditText) findViewById(R.id.regEmail)).setText("");
+        } else {
+            dao.createUsuario(usuario, this);
+            Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
+            ((EditText) findViewById(R.id.regUsuario)).setText("");
+            ((EditText) findViewById(R.id.regPassword)).setText("");
+            ((EditText) findViewById(R.id.regNombre)).setText("");
+            ((EditText) findViewById(R.id.regApellido)).setText("");
+            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
+            ((EditText) findViewById(R.id.regEmail)).setText("");
+            Intent i = new Intent(Registro.this, MainActivity.class);
+            startActivity(i);
+            finish();
         }
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
 
-Codigo anterior
+//fin 2do intento
+
+/*Codigo anterior
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

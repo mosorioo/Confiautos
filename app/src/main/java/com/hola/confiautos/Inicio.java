@@ -9,14 +9,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hola.confiautos.entidades.Usuario;
-import com.hola.confiautos.services.daoUsuario;
+import com.hola.confiautos.services.DaoUsuario;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
     Button btnTurnoNuevo, btnMisTurnos, btnNosotros, btnBeneficios, btnMisAutos, btnMiPerfil, btnSalir;
     TextView nombre;
     int id = 0; //para recuperar el id de usuario
-    Usuario u;
-    daoUsuario dao;
+    Usuario user;
+    DaoUsuario dao = new DaoUsuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,10 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         btnBeneficios = (Button) findViewById((R.id.btnBeneficios));
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
-    /*    Bundle b=getIntent().getExtras();
-        id=b.getInt("id");
-        dao=new daoUsuario(this);
-        u=dao.getUsuarioById(id);
-        nombre.setText(u.getNombre()+" "+u.getApellidos());*/
+        user=dao.getUserbyID(getIntent().getIntExtra("Id",0), Inicio.this);
+        nombre.setText(user.getNombre());
+
+
     }
 
     @Override
