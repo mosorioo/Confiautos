@@ -50,7 +50,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             public void onClick(View v) {
                 volver();
             }
-        });¨*/
+        });*/
 
 
     }
@@ -63,8 +63,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     private void registrarUsuario() {
         Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString());
-       // Integer existe = dao.validarUsuario(usuario, this);
-        Integer existe = 0;
+        Integer existe = dao.validarUsuario(usuario, this);
+        //Integer existe = 0;
         dao.buscarUsuarios(Registro.this);
         if (existe > 0) {
             Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();

@@ -4,7 +4,6 @@ package com.hola.confiautos.services;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View;
 
 import com.hola.confiautos.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Usuario;
@@ -58,7 +57,7 @@ public class DaoUsuario {
     public Usuario getUserbyUsuarioAndPass(String user, String pass, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + "WHERE "
+        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + " WHERE "
                 +Utilidades.USUARIO + " ='" + user + "' AND " + Utilidades.PASSWORD + " ='" + pass + "'", null);
         if (c.moveToFirst()) {
             return convertToUser(c);
@@ -70,7 +69,7 @@ public class DaoUsuario {
     public Usuario getUserbyID(int id, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + "WHERE "
+        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + " WHERE "
                 +Utilidades.ID+" =" +id, null);
         if (c.moveToFirst()) {
             return convertToUser(c);

@@ -21,11 +21,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(String s, String toString, String string, String s1, String toString1, String string1) {
+    public Usuario(String usuario, String password, String nombre, String apellido, String telefono, String email) {
+        this(null, usuario, password, nombre, apellido, telefono, email);
     }
 
     public Usuario() {
-
     }
 
     //Getters y Setters

@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         Intent i2 = new Intent(MainActivity.this, Inicio.class);
                         i2.putExtra("Id", usuario.getId());
-                        ((EditText) findViewById(id.regUsuario)).setText("");
-                        ((EditText) findViewById(id.regPassword)).setText("");
+                     //   ((EditText) findViewById(id.regUsuario)).setText("");
+                      //  ((EditText) findViewById(id.regPassword)).setText("");
                         startActivity(i2);
             /*@Override
             public void onClick(View v) {
