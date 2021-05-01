@@ -63,7 +63,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     private void registrarUsuario() {
         Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString());
-        Integer existe = dao.validarUsuario(usuario, this);
+       // Integer existe = dao.validarUsuario(usuario, this);
+        Integer existe = 0;
+        dao.buscarUsuarios(Registro.this);
         if (existe > 0) {
             Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
             ((EditText) findViewById(R.id.regUsuario)).setText("");
@@ -72,7 +74,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             ((EditText) findViewById(R.id.regApellido)).setText("");
             ((EditText) findViewById(R.id.regNroTelefono)).setText("");
             ((EditText) findViewById(R.id.regEmail)).setText("");
-        } else {
+        } else if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString())) {
+            Toast.makeText(this, "ERROR: Campos Vacios", Toast.LENGTH_LONG).show();
+        }
+        else {
             dao.createUsuario(usuario, this);
             Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
             ((EditText) findViewById(R.id.regUsuario)).setText("");

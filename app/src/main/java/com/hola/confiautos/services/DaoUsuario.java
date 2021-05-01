@@ -15,12 +15,12 @@ import java.util.Collection;
 
 public class DaoUsuario {
 
-    public void createUsuario (Usuario usuario, View.OnClickListener context) {
+    public void createUsuario (Usuario usuario, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
 
         SQLiteDatabase db = conn.getWritableDatabase();
-        String insert = "INSERT INTO " + Utilidades.TABLA_USUARIO + "(" + Utilidades.USUARIO + ", " + Utilidades.PASSWORD + ", " + Utilidades.NOMBRE + ", " + Utilidades.APELLIDO + ", " + Utilidades.TELEFONO + ", " + Utilidades.EMAIL + ") " +
-                "VALUES ('" + usuario.getUsuario() + "', '" + usuario.getPassword() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getTelefono() + "', '" + usuario.getEmail() + "')";
+        String insert = "INSERT INTO " + Utilidades.TABLA_USUARIO +" ( " + Utilidades.USUARIO + "," + Utilidades.PASSWORD + "," + Utilidades.NOMBRE + "," + Utilidades.APELLIDO + "," + Utilidades.TELEFONO + "," + Utilidades.EMAIL + ") " +
+                "VALUES ('"+ usuario.getUsuario() + "' , '" + usuario.getPassword() + "' , '" + usuario.getNombre() + "' , '" + usuario.getApellido() + "' , '" + usuario.getTelefono() + "' , '" + usuario.getEmail() + "')";
 
         db.execSQL(insert);
         db.close();
@@ -78,18 +78,28 @@ public class DaoUsuario {
         return null;
     }
 
-    public Integer validarUsuario (Usuario usuario, View.OnClickListener context){
+    public Integer validarUsuario (Usuario usuario, Context context){
       //  ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
         Integer exist;
-        Cursor c = db.rawQuery("SELECT COUNT (" +Utilidades.USUARIO + ") FROM "+Utilidades.TABLA_USUARIO + "WHERE USUARIO = '" + usuario.getUsuario().toString() + "'", null);
+        Cursor c = db.rawQuery("SELECT COUNT (" +Utilidades.USUARIO + ") FROM "
+                +Utilidades.TABLA_USUARIO + " WHERE USUARIO = '" + usuario.getUsuario().toString() + "'", null);
+        /*SELECT COUNT (USUARIO) FROM USUARIO WHERE USUARIO = 'glarias'*/
         c.moveToNext();
         exist= c.getInt(0);
         c.close();
         db.close();
         conn.close();
         return exist;
+    }
+
+    public boolean isNull(String u, String p, String n, String a, String t, String e) {
+        if (u.equals("") && p.equals("") && n.equals("") && a.equals("") && t.equals("") && e.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
