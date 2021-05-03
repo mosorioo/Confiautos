@@ -8,14 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 
 public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
 
     EditText us, pas, nom, ape, tel, email;
     Button guard, volv;
-    DaoUsuario dao;
     private View v;
+    DaoUsuario dao = new DaoUsuario();
+    Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
         guard.setOnClickListener(this);
         volv.setOnClickListener(this);
         //dao=new daoUsuario(this);
+        user=dao.getUserbyID(getIntent().getIntExtra("Id",0), MiPerfil.this);
+
     }
 
   /*  @Override
@@ -50,7 +54,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.btnEditVolver:
                 Intent i = new Intent(MiPerfil.this, Inicio.class);
-               // finish();
+                i.putExtra("Id", user.getId());
                 startActivity(i);
                 break;
         }
