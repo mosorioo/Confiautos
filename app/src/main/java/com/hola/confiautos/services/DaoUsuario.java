@@ -94,12 +94,14 @@ public class DaoUsuario {
     }
 
     public boolean isNull(String u, String p, String n, String a, String t, String e) {
-        if (u.equals("") && p.equals("") && n.equals("") && a.equals("") && t.equals("") && e.equals("")) {
+        if (u.equals("") || p.equals("") || n.equals("") || a.equals("") || t.equals("") || e.equals("")) {
             return false;
         } else {
             return true;
         }
     }
+
+
 }
 
 /*

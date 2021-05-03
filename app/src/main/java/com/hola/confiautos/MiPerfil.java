@@ -15,6 +15,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
     EditText us, pas, nom, ape, tel, email;
     Button guard, volv;
     DaoUsuario dao;
+    private View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +30,29 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
         guard=(Button)findViewById(R.id.btnEditGuardar);
         volv=(Button)findViewById(R.id.btnEditVolver);
         guard.setOnClickListener(this);
-       // volv.setOnClickListener(this);
+        volv.setOnClickListener(this);
         //dao=new daoUsuario(this);
     }
 
-    @Override
+  /*  @Override
     public void onClick(View v) {
 
-    }
+    } */
 
     //Metodo para el boton Volver, este regresa a Inicio
-    public void Volver(View view) {
+  /*  public void Volver(View view) {
         Intent i = new Intent(MiPerfil.this, Inicio.class);
         startActivity(i);
         finish();
+    } */
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnEditVolver:
+                Intent i = new Intent(MiPerfil.this, Inicio.class);
+               // finish();
+                startActivity(i);
+                break;
+        }
     }
 }

@@ -32,8 +32,8 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
         user=dao.getUserbyID(getIntent().getIntExtra("Id",0), Inicio.this);
-        nombre.setText(user.getNombre());
-
+       // if (user) // si es nulo...
+        nombre.setText("Bienvenido/a " +user.getNombre());
 
     }
 

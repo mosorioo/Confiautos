@@ -16,7 +16,7 @@ public class Nosotros extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nosotros);
-      //  btnVolver = (Button) findViewById((R.id.btnVolver));
+        btnVolver = (Button) findViewById((R.id.btnVolver));
     }
 
     //Metodo para el boton Volver, este regresa a Inicio

@@ -30,7 +30,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         tel = (EditText) findViewById(R.id.regNroTelefono);
         email = (EditText) findViewById(R.id.regEmail);
         btnReg = findViewById(R.id.btnRegRegistrar);
-        btnVolv = findViewById(R.id.btnVolver);
+        btnVolv = findViewById(R.id.btnRegVolver);
 
         // reg = (Button) findViewById(R.id.btnRegRegistrar);
         // volv = (Button) findViewById(R.id.btnRegVolver);
@@ -45,20 +45,21 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-    /*    btnVolv.setOnClickListener(new View.OnClickListener() {
+        btnVolv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 volver();
             }
-        });*/
+        });
 
 
     }
 
     private void volver() {
+    //    onBackPressed();
         Intent i1 = new Intent(Registro.this, MainActivity.class);
         startActivity(i1);
-        finish();
+       // finish();
     }
 
     private void registrarUsuario() {
@@ -70,18 +71,27 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
             ((EditText) findViewById(R.id.regUsuario)).setText("");
             ((EditText) findViewById(R.id.regPassword)).setText("");
+            ((EditText) findViewById(R.id.regConfPassword)).setText("");
             ((EditText) findViewById(R.id.regNombre)).setText("");
             ((EditText) findViewById(R.id.regApellido)).setText("");
             ((EditText) findViewById(R.id.regNroTelefono)).setText("");
             ((EditText) findViewById(R.id.regEmail)).setText("");
         } else if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString())) {
             Toast.makeText(this, "ERROR: Campos Vacios", Toast.LENGTH_LONG).show();
+            ((EditText) findViewById(R.id.regUsuario)).setText("");
+            ((EditText) findViewById(R.id.regPassword)).setText("");
+            ((EditText) findViewById(R.id.regConfPassword)).setText("");
+            ((EditText) findViewById(R.id.regNombre)).setText("");
+            ((EditText) findViewById(R.id.regApellido)).setText("");
+            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
+            ((EditText) findViewById(R.id.regEmail)).setText("");
         }
         else {
             dao.createUsuario(usuario, this);
             Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
             ((EditText) findViewById(R.id.regUsuario)).setText("");
             ((EditText) findViewById(R.id.regPassword)).setText("");
+            ((EditText) findViewById(R.id.regConfPassword)).setText("");
             ((EditText) findViewById(R.id.regNombre)).setText("");
             ((EditText) findViewById(R.id.regApellido)).setText("");
             ((EditText) findViewById(R.id.regNroTelefono)).setText("");
