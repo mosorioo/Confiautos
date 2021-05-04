@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      //   ((EditText) findViewById(id.regUsuario)).setText("");
                       //  ((EditText) findViewById(id.regPassword)).setText("");
                         startActivity(i2);
+                        finish();
             /*@Override
             public void onClick(View v) {
                 Intent i1 = new Intent(MainActivity.this, Inicio.class);

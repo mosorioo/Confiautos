@@ -41,4 +41,6 @@
     <string name="guardar">Guardar</string>
     <string name="icoWhatsApp">icoWhatsApp</string>
     <string name="icoInstagram">IcoInstagram</string>
+    <string name="Llamar">Llamar</string>
+    <string name="Sms">Sms</string>
 </resources>

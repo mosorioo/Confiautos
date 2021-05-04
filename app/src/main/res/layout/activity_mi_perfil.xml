@@ -45,7 +45,7 @@
             android:layout_height="47dp"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:enabled="true"
+            android:enabled="false"
             android:hint="@string/nombre_de_usuario"
             android:importantForAutofill="no"
             android:inputType="textPersonName"

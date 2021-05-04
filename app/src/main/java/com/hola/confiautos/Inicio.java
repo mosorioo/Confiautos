@@ -67,12 +67,13 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         finish();
         */
         //Con este cierro la app completamente.
-        finish();
-        System.exit(0);
-        /*
+        /*finish();
+        System.exit(0);*/
+
         Intent i6 = new Intent(Inicio.this, MainActivity.class); //Me lleva al login
         getIntent().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
-        startActivity(i6); */
+        startActivity(i6);
+        finish();
     }
 
 }

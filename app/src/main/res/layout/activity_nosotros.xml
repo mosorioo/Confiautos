@@ -148,33 +148,33 @@
             app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
         <ImageButton
-            android:id="@+id/iBtnInstag"
+            android:id="@+id/iBtnInstagram"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="181dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="195dp"
+            android:layout_marginBottom="91dp"
             android:contentDescription="@string/icoInstagram"
+            android:onClick="Instagram"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textRedes"
-            app:layout_constraintTop_toBottomOf="@+id/iBtnWhatsApp"
+            app:layout_constraintTop_toBottomOf="@+id/iBtnLlamar"
             app:srcCompat="@drawable/instagram" />
 
         <ImageButton
             android:id="@+id/iBtnWhatsApp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="180dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="83dp"
             android:contentDescription="@string/icoWhatsApp"
-            app:layout_constraintBottom_toTopOf="@+id/iBtnInstag"
+            android:onClick="WhatsApp"
+            app:layout_constraintBottom_toTopOf="@+id/btnNosotrosVolver"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textLlamar"
+            app:layout_constraintStart_toEndOf="@+id/iBtnSms"
             app:layout_constraintTop_toBottomOf="@+id/mapView"
             app:srcCompat="@drawable/whats" />
 
@@ -190,6 +190,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textdireccion" />
+
+        <ImageButton
+            android:id="@+id/iBtnLlamar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="12dp"
+            android:onClick="Llamar"
+            app:layout_constraintBottom_toTopOf="@+id/iBtnInstagram"
+            app:layout_constraintEnd_toStartOf="@+id/iBtnSms"
+            app:layout_constraintStart_toEndOf="@+id/textLlamar"
+            app:layout_constraintTop_toBottomOf="@+id/mapView"
+            app:srcCompat="@drawable/llamada"
+            android:contentDescription="@string/Llamar" />
+
+        <ImageButton
+            android:id="@+id/iBtnSms"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="83dp"
+            android:onClick="Sms"
+            app:layout_constraintBottom_toTopOf="@+id/btnNosotrosVolver"
+            app:layout_constraintEnd_toStartOf="@+id/iBtnWhatsApp"
+            app:layout_constraintStart_toEndOf="@+id/iBtnLlamar"
+            app:layout_constraintTop_toBottomOf="@+id/mapView"
+            app:srcCompat="@drawable/sms"
+            android:contentDescription="@string/Sms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

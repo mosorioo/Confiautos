@@ -56,6 +56,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener{
                 Intent i = new Intent(MiPerfil.this, Inicio.class);
                 i.putExtra("Id", user.getId());
                 startActivity(i);
+                finish();
                 break;
         }
     }
