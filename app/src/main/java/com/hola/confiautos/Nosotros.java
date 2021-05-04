@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -114,12 +115,21 @@ public class Nosotros extends AppCompatActivity {
 
     //Metodo para Boton Instagram
     private void instagram() {
-        Toast.makeText(this, "Funciona el Boton Instagram", Toast.LENGTH_LONG).show();
-        /*Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("1125401109"));
-        if(ActivityCompat.checkSelfPermission(Nosotros.this, Manifest.permission.CALL_PHONE)!=
-                PackageManager.PERMISSION_GRANTED)
-            return;
-        startActivity(i1);*/
+       //
+        // Toast.makeText(this, "Funciona el Boton Instagram", Toast.LENGTH_LONG).show();
+        Uri uri = Uri.parse("http://instagram.com/_u/confiautos_malaga");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setPackage("com.instagram.android");
+
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+
+            //No encontró la aplicación, abre la versión web.
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://instagram.com/confiautos_malaga")));
+
+        }
     }
 
     //Metodo para el boton Volver, este regresa a Inicio
