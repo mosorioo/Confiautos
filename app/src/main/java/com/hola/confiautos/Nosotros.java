@@ -16,10 +16,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.MapView;
+//import com.google.android.gms.maps.OnMapReadyCallback;
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 
-public class Nosotros extends AppCompatActivity {
+public class Nosotros extends AppCompatActivity implements View.OnClickListener {
 
     Button btnVolver;
     ImageButton iBtnLLamada, iBtnMensaje, iBtnWsA, iBtnInstag;
@@ -27,6 +30,26 @@ public class Nosotros extends AppCompatActivity {
     Usuario user;
     String message = "¡Hola! Me gustaria obtener información sobre sus servicios";
     String phoneNo = "+5491169452234";
+    /*GoogleMap googleMap;
+    MapView mapView;
+
+        @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    } */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +61,13 @@ public class Nosotros extends AppCompatActivity {
         iBtnInstag = (ImageButton) findViewById(R.id.iBtnInstagram);
         btnVolver = (Button) findViewById((R.id.btnNosotrosVolver));
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), Nosotros.this);
+       /* mapView = (MapView) findViewById(R.id.miMapa);
+        mapView.onCreate(savedInstanceState);
+
+        mapView.getMapAsync(this);
+
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMyLocationEnabled(true); */
 
         iBtnLLamada.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +137,7 @@ public class Nosotros extends AppCompatActivity {
 
         Intent i1 = new Intent();
         i1.setAction(Intent.ACTION_VIEW);
-        String uri = "whatsapp://send?phone="+phoneNo + "&text="+message;
+        String uri = "whatsapp://send?phone=" + phoneNo + "&text=" + message;
         i1.setData(Uri.parse(uri));
         i1.setPackage("com.whatsapp"); //para mandarlo directo a whatsapp
         startActivity(i1);
@@ -115,7 +145,7 @@ public class Nosotros extends AppCompatActivity {
 
     //Metodo para Boton Instagram
     private void instagram() {
-       //
+        //
         // Toast.makeText(this, "Funciona el Boton Instagram", Toast.LENGTH_LONG).show();
         Uri uri = Uri.parse("http://instagram.com/_u/confiautos_malaga");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -124,11 +154,9 @@ public class Nosotros extends AppCompatActivity {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-
             //No encontró la aplicación, abre la versión web.
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://instagram.com/confiautos_malaga")));
-
         }
     }
 
@@ -140,4 +168,17 @@ public class Nosotros extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    /*
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        setUpMap();
+    }
+
+    private void setUpMap() {
+    } */
 }
