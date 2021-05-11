@@ -1,6 +1,7 @@
 package com.hola.confiautos.services;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,23 +13,35 @@ import com.hola.confiautos.utilidades.Utilidades;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static com.hola.confiautos.utilidades.Utilidades.*;
+
 public class DaoUsuario {
 
     public void createUsuario (Usuario usuario, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
 
         SQLiteDatabase db = conn.getWritableDatabase();
-        String insert = "INSERT INTO " + Utilidades.TABLA_USUARIO +" ( " + Utilidades.USUARIO + "," + Utilidades.PASSWORD + "," + Utilidades.NOMBRE + "," + Utilidades.APELLIDO + "," + Utilidades.TELEFONO + "," + Utilidades.EMAIL + ") " +
+        String insert = "INSERT INTO " + TABLA_USUARIO +" ( " + USUARIO + "," + PASSWORD + "," + NOMBRE + "," + APELLIDO + "," + TELEFONO + "," + EMAIL + ") " +
                 "VALUES ('"+ usuario.getUsuario() + "' , '" + usuario.getPassword() + "' , '" + usuario.getNombre() + "' , '" + usuario.getApellido() + "' , '" + usuario.getTelefono() + "' , '" + usuario.getEmail() + "')";
 
         db.execSQL(insert);
         db.close();
     }
 
+    /*Update para un solo campo
+    public void updateUsuario (Integer id, String usuario, String password, String nombre, String apellido, String telefono, String email, Context context ) {
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
+        SQLiteDatabase db = conn.getReadableDatabase();
+        if (db!= null){
+            db.execSQL("UPDATE " + Utilidades.TABLA_USUARIO + " SET "  +Utilidades.PASSWORD + " = '" + password + "' WHERE " +Utilidades.ID+" =" +id, null);
+            db.close();
+        }
+    }*/
+
     public Collection<Usuario> buscarUsuarios(Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLA_USUARIO, null);
         Collection<Usuario> usuarios = new ArrayList<>();
         if (c.moveToFirst()) {
             do {
@@ -43,13 +56,13 @@ public class DaoUsuario {
 
     private Usuario convertToUser(Cursor c) {
         Usuario usuario = new Usuario();
-        usuario.setId(c.getInt(c.getColumnIndex(Utilidades.ID)));
-        usuario.setUsuario(c.getString(c.getColumnIndex(Utilidades.USUARIO)));
-        usuario.setPassword(c.getString(c.getColumnIndex(Utilidades.PASSWORD)));
-        usuario.setNombre(c.getString(c.getColumnIndex(Utilidades.NOMBRE)));
-        usuario.setApellido(c.getString(c.getColumnIndex(Utilidades.APELLIDO)));
-        usuario.setTelefono(c.getString(c.getColumnIndex(Utilidades.TELEFONO)));
-        usuario.setEmail(c.getString(c.getColumnIndex(Utilidades.EMAIL)));
+        usuario.setId(c.getInt(c.getColumnIndex(ID)));
+        usuario.setUsuario(c.getString(c.getColumnIndex(USUARIO)));
+        usuario.setPassword(c.getString(c.getColumnIndex(PASSWORD)));
+        usuario.setNombre(c.getString(c.getColumnIndex(NOMBRE)));
+        usuario.setApellido(c.getString(c.getColumnIndex(APELLIDO)));
+        usuario.setTelefono(c.getString(c.getColumnIndex(TELEFONO)));
+        usuario.setEmail(c.getString(c.getColumnIndex(EMAIL)));
         return usuario;
     }
 
@@ -57,8 +70,8 @@ public class DaoUsuario {
     public Usuario getUserbyUsuarioAndPass(String user, String pass, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + " WHERE "
-                +Utilidades.USUARIO + " ='" + user + "' AND " + Utilidades.PASSWORD + " ='" + pass + "'", null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLA_USUARIO + " WHERE "
+                + USUARIO + " ='" + user + "' AND " + PASSWORD + " ='" + pass + "'", null);
         if (c.moveToFirst()) {
             return convertToUser(c);
         }
@@ -69,8 +82,8 @@ public class DaoUsuario {
     public Usuario getUserbyID(int id, Context context) {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_USUARIO + " WHERE "
-                +Utilidades.ID+" =" +id, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLA_USUARIO + " WHERE "
+                + ID+" =" +id, null);
         if (c.moveToFirst()) {
             return convertToUser(c);
         }
@@ -82,9 +95,8 @@ public class DaoUsuario {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
         SQLiteDatabase db = conn.getReadableDatabase();
         Integer exist;
-        Cursor c = db.rawQuery("SELECT COUNT (" +Utilidades.USUARIO + ") FROM "
-                +Utilidades.TABLA_USUARIO + " WHERE USUARIO = '" + usuario.getUsuario().toString() + "'", null);
-        /*SELECT COUNT (USUARIO) FROM USUARIO WHERE USUARIO = 'glarias'*/
+        Cursor c = db.rawQuery("SELECT COUNT (" + USUARIO + ") FROM "
+                + TABLA_USUARIO + " WHERE USUARIO = '" + usuario.getUsuario().toString() + "'", null);
         c.moveToNext();
         exist= c.getInt(0);
         c.close();
@@ -101,6 +113,30 @@ public class DaoUsuario {
         }
     }
 
+    public boolean isNullSinUser(String p, String n, String a, String t, String e) {
+        if (p.equals("") || n.equals("") || a.equals("") || t.equals("") || e.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //Actualiza los datos del usuario sin el campo usuario
+    public boolean updateUsuario (Usuario user, Context context){
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        ContentValues cv= new ContentValues();
+        cv.put(PASSWORD, user.getPassword());
+        cv.put(NOMBRE, user.getNombre());
+        cv.put(APELLIDO, user.getApellido());
+        cv.put(TELEFONO, user.getTelefono());
+        cv.put(EMAIL, user.getEmail());
+        int row = db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null);
+        System.out.println(row);
+        return row >0;
+        //return (db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null)>0); //Como poner el Table: tabla_usuario
+    }
 
 }
 

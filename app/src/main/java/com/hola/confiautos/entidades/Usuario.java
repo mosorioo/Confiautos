@@ -85,6 +85,14 @@ public class Usuario {
         this.email = email;
     }
 
+    public boolean isNullSinUser() {
+        if (password.equals("") && nombre.equals("") && apellido.equals("") && telefono.equals("") && email.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
 
 /*Codigo anterior

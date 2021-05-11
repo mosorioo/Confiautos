@@ -29,27 +29,7 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
     String message = "¡Hola! Me gustaria obtener información sobre sus servicios";
-    String phoneNo = "+5491169452234";
-    /*GoogleMap googleMap;
-    MapView mapView;
-
-        @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    } */
+    String phoneNo = "+5491164949961";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +41,6 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
         iBtnInstag = (ImageButton) findViewById(R.id.iBtnInstagram);
         btnVolver = (Button) findViewById((R.id.btnNosotrosVolver));
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), Nosotros.this);
-       /* mapView = (MapView) findViewById(R.id.miMapa);
-        mapView.onCreate(savedInstanceState);
-
-        mapView.getMapAsync(this);
-
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setMyLocationEnabled(true); */
 
         iBtnLLamada.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,15 +73,16 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
 
     //Metodo para Boton Llamar
     private void llamar() {
-        // Este va directo al nativo de llamar, no realiza la llamada
-        String phoneNo = "1169452234";
+        // Este va directo al a llamar, no realiza la llamada
+
+        String phoneNo = "1164949961";
         String dial = "tel:" + phoneNo;
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
 
-        /*
-        //Este realiza la llamada directamente
+
+      /*  //Este realiza la llamada directamente
         // No funciona
-       Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("1169452234"));
+       Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("1164949961"));
         if(ActivityCompat.checkSelfPermission(Nosotros.this, Manifest.permission.CALL_PHONE)!=
                 PackageManager.PERMISSION_GRANTED)
             return;
@@ -173,12 +147,4 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    /*
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        setUpMap();
-    }
-
-    private void setUpMap() {
-    } */
 }
