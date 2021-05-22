@@ -1,13 +1,19 @@
 package com.hola.confiautos;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
@@ -18,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText usuario, password;
     Button btnLogin, btnRegistrarse;
     DaoUsuario dao = new DaoUsuario();
+    int REQUESTCODE = 200; //Valor para saber si el usuario acepto el permiso
+    @RequiresApi(api = Build.VERSION_CODES.M)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +66,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                       //  ((EditText) findViewById(id.regPassword)).setText("");
                         startActivity(i2);
                         finish();
-            /*@Override
-            public void onClick(View v) {
-                Intent i1 = new Intent(MainActivity.this, Inicio.class);
-                startActivity(i1);
-            }
-        });*/
 
                     }
                 }
             }
         });
 
-
+        verificarPermisos();
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+
+    public void verificarPermisos(){
+      int permisoSms = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+      int permisoCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+      int permisoAlmacenamiento = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+      //Ver de hacerlo al reves
+      if(permisoSms == PackageManager.PERMISSION_GRANTED && permisoCall == PackageManager.PERMISSION_GRANTED
+              && permisoAlmacenamiento == PackageManager.PERMISSION_GRANTED){
+          //Toast.makeText(this, "Permisos Concedidos", Toast.LENGTH_SHORT).show();
+      } else {
+            requestPermissions( new String[]{Manifest.permission.SEND_SMS, Manifest.permission.CALL_PHONE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTCODE);
+      }
     }
 }
 /*
