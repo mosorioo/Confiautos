@@ -37,10 +37,15 @@
     <string name="telefono">+5191125401109</string>
     <string name="nuestras_redes">Redes Sociales:</string>
     <string name="bienvenido_usuario">Bienvenido/a </string>
-    <string name="usuario">Usuario:</string>
+    <string name="usuario">Usuario</string>
     <string name="guardar">Guardar</string>
     <string name="icoWhatsApp">icoWhatsApp</string>
     <string name="icoInstagram">IcoInstagram</string>
     <string name="Llamar">Llamar</string>
     <string name="Sms">Sms</string>
+    <string name="recuperar">Recuperar</string>
+    <string name="recuPass">Recuperar Password</string>
+    <string name="ingresaEmail">Ingresa tu E-mail para recuperar tu password</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="buscar">Buscar</string>
 </resources>

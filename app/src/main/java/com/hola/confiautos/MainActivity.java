@@ -1,7 +1,6 @@
 package com.hola.confiautos;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -22,7 +21,7 @@ import static com.hola.confiautos.R.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText usuario, password;
-    Button btnLogin, btnRegistrarse;
+    Button btnLogin, btnRegistrarse, btnRecuPass;
     DaoUsuario dao = new DaoUsuario();
     int REQUESTCODE = 200; //Valor para saber si el usuario acepto el permiso
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -32,12 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1); //El 1 corresponde a la version de la BD
-        usuario = (EditText) findViewById(id.txtLoginUser);//para enlazarlos
+        usuario = (EditText) findViewById(id.editIngresarUsuario);//para enlazarlos
         password = (EditText) findViewById(id.txtLoginPassword);
         btnLogin = (Button) findViewById(id.btnLogin);
         btnRegistrarse = (Button) findViewById(id.btnRegistrarse);
-        //btnLogin.setOnClickListener(this); //asigno los eventos
-        //btnRegistrarse.setOnClickListener(this);
+        btnRecuPass = (Button) findViewById(id.btnOlvidePass);
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +67,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                 }
+            }
+        });
+
+        btnRecuPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RecuperarPass.class);
+                startActivity(i);
+                finish();
             }
         });
 
