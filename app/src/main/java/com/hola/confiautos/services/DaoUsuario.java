@@ -90,6 +90,17 @@ public class DaoUsuario {
         return null;
     }
 
+    public Usuario getUserbyEmail(int email, Context context) {
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
+        SQLiteDatabase db = conn.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLA_USUARIO + " WHERE "
+                + EMAIL+" =" +email, null);
+        if (c.moveToFirst()) {
+            return convertToUser(c);
+        }
+        return null;
+    }
+
     public Integer validarUsuario (Usuario usuario, Context context){
       //  ConexionSQLiteHelper conn = new ConexionSQLiteHelper(context, null, 1);
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
@@ -133,6 +144,18 @@ public class DaoUsuario {
         cv.put(TELEFONO, user.getTelefono());
         cv.put(EMAIL, user.getEmail());
         int row = db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null);
+        System.out.println(row);
+        return row >0;
+        //return (db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null)>0); //Como poner el Table: tabla_usuario
+    }
+
+    public boolean updatePass (Usuario user, Context context){
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        ContentValues cv= new ContentValues();
+        cv.put(PASSWORD, user.getPassword());
+        int row = db.update( TABLA_USUARIO, cv, "email="+ user.getEmail(), null);
         System.out.println(row);
         return row >0;
         //return (db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null)>0); //Como poner el Table: tabla_usuario

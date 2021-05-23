@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 String user = usuario.getText().toString();
                 String pass = password.getText().toString();
-                if (user.equals("") && pass.equals(""))
+                if (user.equals("") || pass.equals(""))
                     Toast.makeText(MainActivity.this, "ERROR: campos vacios", Toast.LENGTH_SHORT).show();
                 else {
                     //Usuario usuario = DaoUsuario(user, pass, MainActivity.this);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRecuPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, RecuperarPass.class);
+                Intent i = new Intent(MainActivity.this, RecuperarPassword.class);
                 startActivity(i);
                 finish();
             }
