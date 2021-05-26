@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Inicio">i
+        tools:context=".Inicio">
 
         <ImageView
             android:id="@+id/logo"
@@ -20,14 +20,14 @@
             android:layout_marginEnd="138dp"
             android:layout_marginBottom="29dp"
             android:contentDescription="@string/logoapp"
-            app:layout_constraintBottom_toTopOf="@+id/txtNombreUsuario"
+            app:layout_constraintBottom_toTopOf="@+id/txtMisAutos"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
         <TextView
-            android:id="@+id/txtNombreUsuario"
+            android:id="@+id/txtMisAutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -59,7 +59,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btnTurnoNuevo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombreUsuario" />
+            app:layout_constraintTop_toBottomOf="@+id/txtMisAutos" />
 
         <Button
             android:id="@+id/btnTurnoNuevo"
@@ -124,6 +124,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="64dp"
             android:layout_marginBottom="8dp"
+            android:onClick="MisAutos"
             android:text="@string/mis_autos"
             android:textColor="#CA1717"
             android:textColorHighlight="#BFB8B8"

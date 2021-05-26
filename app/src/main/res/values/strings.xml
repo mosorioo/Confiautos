@@ -48,4 +48,9 @@
     <string name="ingresaEmail">Ingresa tu E-mail para recuperar tu password</string>
     <string name="cancelar">Cancelar</string>
     <string name="buscar">Buscar</string>
+    <string name="misautos">Mis Autos</string>
+    <string name="indicaciones">Desde esta funcionalidad podrá visualizar y gestionar sus autos.</string>
+    <string name="agregar">Agregar</string>
+    <string name="modificar">Modificar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>

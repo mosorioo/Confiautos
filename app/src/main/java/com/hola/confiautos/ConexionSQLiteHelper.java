@@ -20,6 +20,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     //Creo la tabla usuario
     public void onCreate(SQLiteDatabase db_confiautos) {
         db_confiautos.execSQL(Utilidades.CREAR_TABLA_USUARIO);
+        db_confiautos.execSQL(Utilidades.CREAR_TABLA_MIS_AUTOS);
        // db_confiautos.execSQL(CREAR_TABLA_USUARIO);
     }
 
@@ -27,6 +28,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     //Verifica si existe previamente una versión de la BD
     public void onUpgrade(SQLiteDatabase db_confiautos, int versionAntigua, int versionNueva) {
         db_confiautos.execSQL("DROP TABLE IF EXISTS usuarios");
+       // db_confiautos.execSQL("DROP TABLE IF EXISTS misautos");
         onCreate(db_confiautos);
 
     }

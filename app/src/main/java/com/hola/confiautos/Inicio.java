@@ -22,7 +22,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        nombre = (TextView) findViewById(R.id.txtNombreUsuario);
+        nombre = (TextView) findViewById(R.id.txtMisAutos);
         btnNosotros = (Button) findViewById((R.id.btnNosotros));
         btnTurnoNuevo = (Button) findViewById(R.id.btnTurnoNuevo);
         btnMisTurnos = (Button) findViewById(R.id.btnMisTurnos);
@@ -49,11 +49,19 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         finish();
     }
 
-    //Metodo para el boton MiPerfil
-    public void MisDatos (View view) {
-        Intent i1 = new Intent(Inicio.this, MiPerfil.class);
+    //Metodo para el boton MisAutos
+    public void MisAutos (View v) {
+        Intent i1 = new Intent(Inicio.this, MisAutos.class);
         i1.putExtra("Id", user.getId());
         startActivity(i1);
+        finish();
+    }
+
+    //Metodo para el boton MiPerfil
+    public void MisDatos (View view) {
+        Intent i3 = new Intent(Inicio.this, MiPerfil.class);
+        i3.putExtra("Id", user.getId());
+        startActivity(i3);
         finish();
     }
 

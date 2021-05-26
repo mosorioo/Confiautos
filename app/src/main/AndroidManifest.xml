@@ -23,8 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".RecuperarPassword"></activity>
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".MisAutos" />
+        <activity android:name=".RecuperarPassword" />
         <activity android:name=".recuperarPass" />
 
         <meta-data

@@ -1,4 +1,4 @@
-package com.hola.confiautos;
+    package com.hola.confiautos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -125,14 +125,14 @@ public class RecuperarPassword extends AppCompatActivity {
         String confPass = campoConfPass.getText().toString();
 
         if (pass.equals("") || confPass.equals("")) {
-            Toast.makeText(this, "ERROR: Debe completar la Password y confirmarla", Toast.LENGTH_LONG).show();
-        }else if (!validarPass(confPass, pass)) { //no funciona bien
-            Toast.makeText(this, "ERROR: Las password no coinciden", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR: Debe completar la contraseña y confirmarla", Toast.LENGTH_LONG).show();
+      /*  }else if (!validarPass(confPass, pass)) { //no funciona bien
+            Toast.makeText(this, "ERROR: Las contraseñas no coinciden", Toast.LENGTH_LONG).show(); */
         }else{
             ContentValues values= new ContentValues();
             values.put(Utilidades.PASSWORD,campoPass.getText().toString());
             db.update(Utilidades.TABLA_USUARIO, values, Utilidades.EMAIL+"=?", parametro);
-            Toast.makeText(getApplicationContext(),"¡La password se actualizó correctamente!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"¡La contraseña se actualizó correctamente!",Toast.LENGTH_LONG).show();
             limpiar();
             db.close();
             Intent i = new Intent(RecuperarPassword.this, MainActivity.class);
