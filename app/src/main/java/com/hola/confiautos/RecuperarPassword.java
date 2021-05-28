@@ -11,18 +11,23 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 import com.hola.confiautos.utilidades.Utilidades;
 
-public class RecuperarPassword extends AppCompatActivity {
+import java.util.Objects;
+
+    public class RecuperarPassword extends AppCompatActivity {
 
     EditText campoEmail, campoPass, campoConfPass, campoUsuario;
+    TextView campoError;
     Button btnBuscar, btnGuardar, btnCancelar;
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
+    String error;
 
     ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
 
@@ -38,6 +43,7 @@ public class RecuperarPassword extends AppCompatActivity {
         btnBuscar = findViewById(R.id.btnBuscarEmail);
         btnGuardar = findViewById(R.id.btnRecuGuardar);
         btnCancelar = findViewById(R.id.btnRecuCancelar);
+        campoError = findViewById(R.id.txtError);
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,14 +57,15 @@ public class RecuperarPassword extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                if (campoPass == null || campoConfPass == null) {
-                    Toast.makeText(this, "ERROR: Debe completar la Password y confirmarla", Toast.LENGTH_LONG).show();
-                }
-                else */
-                    actualizarPassword();
-            }
 
+            if (validarPass()){
+                actualizarPassword();
+            } else {
+                campoError.setVisibility(View.VISIBLE);
+                campoError.setText(error);
+                limpiarPass();
+            }
+        }
         });
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -81,26 +88,7 @@ public class RecuperarPassword extends AppCompatActivity {
         }
     }
 
-    /* Este tiene algo raro
-    private void buscarUsuario() {
-      //  ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-        SQLiteDatabase db = conn.getReadableDatabase();
-
-        String[] parametros = {campoEmail.getText().toString()};
-
-        try {
-            //Select Usuario from tabla_usuarios where email = algo
-            Cursor cursor = db.rawQuery("SELECT " + Utilidades.USUARIO + " FROM " + Utilidades.TABLA_USUARIO + " WHERE " + Utilidades.EMAIL + "= ? ", parametros);
-
-            cursor.moveToFirst();
-            campoUsuario.setText(cursor.getString(0));
-
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "El Email no existe", Toast.LENGTH_LONG).show();
-            campoEmail.setText("");
-        }
-    } */
-
+    //Sirve para recuperar el usuario en la base de datos
     private void consultarUsuario(){
         SQLiteDatabase db = conn.getReadableDatabase();
         String[] parametros = {campoEmail.getText().toString()};
@@ -117,6 +105,7 @@ public class RecuperarPassword extends AppCompatActivity {
         }
     }
 
+    //Guarda la nueva contraseña
     public void actualizarPassword() {
         SQLiteDatabase db = conn.getWritableDatabase();
         String[] parametro = {campoEmail.getText().toString()};
@@ -124,10 +113,10 @@ public class RecuperarPassword extends AppCompatActivity {
         String pass = campoPass.getText().toString();
         String confPass = campoConfPass.getText().toString();
 
-        if (pass.equals("") || confPass.equals("")) {
+     /*   if (pass.equals("") || confPass.equals("")) {
             Toast.makeText(this, "ERROR: Debe completar la contraseña y confirmarla", Toast.LENGTH_LONG).show();
-      /*  }else if (!validarPass(confPass, pass)) { //no funciona bien
-            Toast.makeText(this, "ERROR: Las contraseñas no coinciden", Toast.LENGTH_LONG).show(); */
+        }else if (!validarPass(confPass, pass)) { //no funciona bien
+            Toast.makeText(this, "ERROR: Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
         }else{
             ContentValues values= new ContentValues();
             values.put(Utilidades.PASSWORD,campoPass.getText().toString());
@@ -139,24 +128,48 @@ public class RecuperarPassword extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+        */
 
+        ContentValues values= new ContentValues();
+        values.put(Utilidades.PASSWORD,campoPass.getText().toString());
+        db.update(Utilidades.TABLA_USUARIO, values, Utilidades.EMAIL+"=?", parametro);
+        Toast.makeText(getApplicationContext(),"¡La contraseña se actualizó correctamente!",Toast.LENGTH_LONG).show();
+        limpiarTodo();
+        campoError.setVisibility(View.INVISIBLE);
+        db.close();
+        Intent i = new Intent(RecuperarPassword.this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
-    private void limpiar() {
+    private void limpiarTodo() {
         campoEmail.setText("");
         campoUsuario.setText("");
         campoPass.setText("");
         campoConfPass.setText("");
     }
 
-    private boolean validarPass(String pass, String confpas){
-        if (confpas != pass ){
-            return false;
-            // Toast.makeText(this, "ERROR: La password no coincide", Toast.LENGTH_LONG).show();
-        } else {
-            return true;
-        }
+    private void limpiarPass() {
+        campoPass.setText("");
+        campoConfPass.setText("");
     }
 
+    //Validaciones en los campos Pass y confPass
+    private boolean validarPass(){
+        String pass = campoPass.getText().toString();
+        String confPass = campoConfPass.getText().toString();
+
+        if (!pass.equals("") && !confPass.equals("")){
+            if (confPass.equals(pass)) {
+                return true;
+            }else {
+                error = "Las contraseñas ingresadas deben coincidir";
+                return false;
+            }
+        }else {
+            error = "Debe completar la contraseña y confirmarla";
+            return false;
+        }
+    }
 
 }
