@@ -28,8 +28,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     //Verifica si existe previamente una versión de la BD
     public void onUpgrade(SQLiteDatabase db_confiautos, int versionAntigua, int versionNueva) {
         db_confiautos.execSQL("DROP TABLE IF EXISTS usuarios");
-       // db_confiautos.execSQL("DROP TABLE IF EXISTS misautos");
+        db_confiautos.execSQL("DROP TABLE IF EXISTS autos");
         onCreate(db_confiautos);
-
     }
 }

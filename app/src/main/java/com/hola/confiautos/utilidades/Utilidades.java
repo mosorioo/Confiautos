@@ -22,6 +22,7 @@ public class Utilidades {
     public static final String AÑO = "año";
     public static final String NRO_MOTOR = "nor_motor";
     public static final String NRO_CHASIS = "nro_chasis";
+    public static final String FOTO_AUTO = "foto_auto";
 
     public static final String CREAR_TABLA_USUARIO = "CREATE TABLE " + TABLA_USUARIO + " " +
             "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USUARIO + " TEXT, " +
@@ -29,6 +30,6 @@ public class Utilidades {
 
     public static final String CREAR_TABLA_MIS_AUTOS = "CREATE TABLE " + TABLA_MIS_AUTOS + " " +
             "(" + ID_AUTO + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ID_USUARIO + " TEXT, " + MARCA + " TEXT, " +
-            "" + MODELO + " TEXT, " + AÑO + " TEXT, " + NRO_MOTOR + " TEXT, " + NRO_CHASIS + " TEXT)";
+            "" + MODELO + " TEXT, " + AÑO + " TEXT, " + NRO_MOTOR + " TEXT, " + NRO_CHASIS + " TEXT, " + FOTO_AUTO + " TEXT)";
 
 }

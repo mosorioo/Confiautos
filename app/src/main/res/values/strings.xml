@@ -58,4 +58,10 @@
     <string name="leyendaPass">Contraseña: mínimo 8 números</string>
     <string name="leyendaConfPass">Confirmar contraseña</string>
     <string name="leyendaTlf">Telefono: Mínimo 10 números</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="nro_chasis">Nro. Chasis</string>
+    <string name="nro_motor">Nro. Motor</string>
+    <string name="año">Año</string>
+    <string name="auto">auto</string>
 </resources>

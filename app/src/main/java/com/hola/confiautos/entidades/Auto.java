@@ -11,9 +11,10 @@ public class Auto {
     private Integer año;
     private String nroMotor;
     private String nroChasis;
+    private String fotoAuto;
 
     //Constructor
-    public Auto(Integer id, Integer idUsuario, String marca, String modelo, Integer año, String nroMotor, String nroChasis) {
+    public Auto(Integer id, Integer idUsuario, String marca, String modelo, Integer año, String nroMotor, String nroChasis, String fotoAuto) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.marca = marca;
@@ -21,10 +22,11 @@ public class Auto {
         this.año = año;
         this.nroMotor = nroMotor;
         this.nroChasis = nroChasis;
+        this.fotoAuto = fotoAuto;
     }
 
-    public Auto(String marca, String modelo, Integer año, String nroMotor, String nroChasis) {
-        this(null, null, marca, modelo, año, nroMotor, nroChasis);
+    public Auto(String marca, String modelo, Integer año, String nroMotor, String nroChasis, String fotoAuto) {
+        this(null, null, marca, modelo, año, nroMotor, nroChasis, fotoAuto);
     }
 
     public Auto() {
@@ -85,5 +87,11 @@ public class Auto {
 
     public void setNroChasis(String nroChasis) {
         this.nroChasis = nroChasis;
+    }
+
+    public String getFotoAuto() { return fotoAuto;
+    }
+
+    public void setFotoAuto(String fotoAuto) { this.fotoAuto = fotoAuto;
     }
 }
