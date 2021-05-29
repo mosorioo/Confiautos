@@ -54,4 +54,8 @@
     <string name="modificar">Modificar</string>
     <string name="eliminar">Eliminar</string>
     <string name="error">error</string>
+    <string name="leyendaUsuario">Usuario: mínimo 6 letras</string>
+    <string name="leyendaPass">Contraseña: mínimo 8 números</string>
+    <string name="leyendaConfPass">Confirmar contraseña</string>
+    <string name="leyendaTlf">Telefono: Mínimo 10 números</string>
 </resources>

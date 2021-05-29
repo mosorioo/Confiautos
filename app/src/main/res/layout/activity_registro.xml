@@ -43,14 +43,14 @@
             android:layout_height="47dp"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:hint="@string/nombre_de_usuario"
+            android:hint="@string/leyendaUsuario"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/regPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textRegistroPersona"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/textRegistroPersona" />
 
         <EditText
             android:id="@+id/regPassword"
@@ -58,7 +58,7 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="@string/password"
+            android:hint="@string/leyendaPass"
             android:importantForAutofill="no"
             android:inputType="none|textPassword"
             app:layout_constraintBottom_toTopOf="@+id/regConfPassword"
@@ -73,7 +73,7 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="@string/confirmar_password"
+            android:hint="@string/leyendaConfPass"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/regNombre"
@@ -116,7 +116,7 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="@string/nro_de_telefono"
+            android:hint="@string/leyendaTlf"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/regEmail"
@@ -175,6 +175,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnRegRegistrar"
+            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+
+        <TextView
+            android:id="@+id/errorDatos"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="17dp"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegRegistrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/regEmail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

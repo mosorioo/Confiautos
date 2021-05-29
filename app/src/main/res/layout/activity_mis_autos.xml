@@ -48,18 +48,19 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/indicaciones"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMisAutos" />
 
     <Button
         android:id="@+id/btnAgregar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="42dp"
         android:layout_marginBottom="69dp"
         android:onClick="Agregar"
@@ -67,54 +68,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnModificar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
         android:id="@+id/btnModificar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="42dp"
         android:layout_marginBottom="69dp"
         android:text="@string/modificar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnEliminar"
+        app:layout_constraintEnd_toStartOf="@+id/btnEliminarAuto"
         app:layout_constraintStart_toEndOf="@+id/btnAgregar"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
-        android:id="@+id/btnEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="7dp"
+        android:id="@+id/btnEliminarAuto"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="69dp"
         android:text="@string/eliminar"
-        app:layout_constraintBottom_toTopOf="@+id/btnMisAutosVolver"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnModificar"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
         android:id="@+id/btnMisAutosVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="161dp"
         android:layout_marginBottom="16dp"
         android:text="@string/volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEliminar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModificar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="381dp"
-        android:layout_height="345dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="12dp"
+    <ListView
+        android:id="@+id/listAutos"
+        android:layout_width="376dp"
+        android:layout_height="315dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnEliminar"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIndicaciones" />
