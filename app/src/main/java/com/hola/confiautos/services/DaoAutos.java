@@ -24,7 +24,7 @@ public class DaoAutos {
 
         SQLiteDatabase db = conn.getWritableDatabase();
         String insert = "INSERT INTO " + TABLA_MIS_AUTOS +" ( " + ID_USUARIO + "," + MARCA + "," + MODELO + "," + AÑO + "," + NRO_MOTOR + "," + NRO_CHASIS + ") " +
-                "VALUES ('"+ auto.getIdUsuario() + "' , '" + auto.getMarca() + "' , '" + auto.getModelo() + "' , '" + auto.getAño() + "' , '" + auto.getNroMotor() + "' , '" + auto.getNroChasis() + "')";
+                "VALUES ('"+ auto.getIdUsuario() + "' , '" + auto.getMarca() + "' , '" + auto.getModelo() + "' , '" + auto.getAño() + "' , '" + auto.getNroMotor() + "' , '" + auto.getNroChasis() + "', '" + auto.getFotoAuto() + "')";
 
         db.execSQL(insert);
         db.close();
