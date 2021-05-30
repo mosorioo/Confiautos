@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtMisAutos" />
 
     <Button
-        android:id="@+id/btnAgregar"
+        android:id="@+id/btnAgregarAuto"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -66,12 +66,12 @@
         android:onClick="Agregar"
         android:text="@string/agregar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnModificar"
+        app:layout_constraintEnd_toStartOf="@+id/btnModificarAuto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
-        android:id="@+id/btnModificar"
+        android:id="@+id/btnModificarAuto"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -80,7 +80,7 @@
         android:text="@string/modificar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnEliminarAuto"
-        app:layout_constraintStart_toEndOf="@+id/btnAgregar"
+        app:layout_constraintStart_toEndOf="@+id/btnAgregarAuto"
         app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
@@ -93,7 +93,7 @@
         android:text="@string/eliminar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnModificar"
+        app:layout_constraintStart_toEndOf="@+id/btnModificarAuto"
         app:layout_constraintTop_toBottomOf="@+id/listAutos" />
 
     <Button
@@ -108,7 +108,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModificar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModificarAuto" />
 
     <ListView
         android:id="@+id/listAutos"
@@ -117,7 +117,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregarAuto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIndicaciones" />

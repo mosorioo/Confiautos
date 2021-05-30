@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hola.confiautos.entidades.Usuario;
@@ -17,6 +18,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
 
     EditText us, pas, nom, ape, tel, email;
     Button btnGuard, btnVolv;
+    TextView error;
     private View v;
     DaoUsuario dao = new DaoUsuario();
     Usuario user;

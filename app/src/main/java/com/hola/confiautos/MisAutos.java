@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -24,11 +23,12 @@ import java.util.List;
 
 public class MisAutos extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnVolv;
+    Button btnVolv, btnAgregar, btnModificar, btnEliminar;
     private View v;
+
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
-    Integer id = 0;
+    Integer id = 0; //para recuperar el id de usuario
     Intent x;
 
     ListView mListView;
@@ -50,11 +50,25 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         mAdapter=new AutoAdaptador(this,R.layout.card_view_auto,mListAutos);
         mListView.setAdapter(mAdapter);
 
-        btnVolv = (Button) findViewById(R.id.btnMisAutosVolver);
+        btnAgregar = findViewById(R.id.btnAgregarAuto);
+        btnModificar = findViewById(R.id.btnModificarAuto);
+        btnEliminar = findViewById(R.id.btnEliminarAuto);
+        btnVolv = findViewById(R.id.btnMisAutosVolver);
         //dao=new daoUsuario(this);
+
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MisAutos.this);
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MisAutos.this, AgregarAuto.class);
+                i.putExtra("Id", user.getId());
+                startActivity(i);
+                finish();
+            }
+        });
 
         btnVolv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,18 +86,17 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
 
     }
 
+    //Solo para la prueba rapida
     private void llenarBasePrueba() {
 
-
         SQLiteDatabase db=conxDB.getWritableDatabase();
-
 
         for(int i=0;i<3;i++){
             ContentValues values=new ContentValues();
             values.put(Utilidades.ID_USUARIO,id.toString());
             values.put(Utilidades.MARCA,"PEUGEOT ");
             values.put(Utilidades.MODELO,"207");
-            values.put(Utilidades.AÑO,"2006");
+            values.put(Utilidades.ANIO,"2006");
             values.put(Utilidades.NRO_MOTOR,"121245454");
             values.put(Utilidades.NRO_CHASIS,"555454");
             Long idresultante=db.insert(Utilidades.TABLA_MIS_AUTOS,Utilidades.ID_AUTO,values);

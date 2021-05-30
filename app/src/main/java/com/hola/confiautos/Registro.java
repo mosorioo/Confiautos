@@ -48,6 +48,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         btnVolv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 volver();
             }
         });

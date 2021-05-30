@@ -62,6 +62,13 @@
     <string name="modelo">Modelo</string>
     <string name="nro_chasis">Nro. Chasis</string>
     <string name="nro_motor">Nro. Motor</string>
-    <string name="año">ano</string>
+    <string name="leyenda_nro_chasis">Nro. Chasis: 12 digitos</string>
+    <string name="leyenda_nro_motor">Nro. Motor: 9 dígitos</string>
+    <string name="año">Año</string>
     <string name="auto">auto</string>
+    <string name="tomarFoto">Tomar Foto</string>
+    <string name="cargarFoto">Cargar Foto</string>
+    <string name="agregarAuto">Cargar los datos del Auto</string>
+    <string name="agregarFotoAuto">Agregue una foto del auto</string>
+    <string name="todoo">TODO</string>
 </resources>
