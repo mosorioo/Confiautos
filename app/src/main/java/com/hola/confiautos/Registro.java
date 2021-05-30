@@ -3,9 +3,11 @@ package com.hola.confiautos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,22 +15,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 
+import java.util.regex.Pattern;
+
 public class Registro extends AppCompatActivity implements View.OnClickListener {
     EditText us, pas, confpas, nom, ape, tel, email;
     Button btnReg, btnVolv;
     DaoUsuario dao = new DaoUsuario();
+    TextView errorDatos;
+    String error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        us = (EditText) findViewById(R.id.regUsuario);
-        pas = (EditText) findViewById(R.id.regPassword);
-        confpas = (EditText) findViewById(R.id.regConfPassword);
-        nom = (EditText) findViewById(R.id.regNombre);
-        ape = (EditText) findViewById(R.id.regApellido);
-        tel = (EditText) findViewById(R.id.regNroTelefono);
-        email = (EditText) findViewById(R.id.regEmail);
+        us = findViewById(R.id.regUsuario);
+        pas = findViewById(R.id.regPassword);
+        confpas = findViewById(R.id.regConfPassword);
+        nom = findViewById(R.id.regNombre);
+        ape = findViewById(R.id.regApellido);
+        tel = findViewById(R.id.regNroTelefono);
+        email = findViewById(R.id.regEmail);
         btnReg = findViewById(R.id.btnRegRegistrar);
         btnVolv = findViewById(R.id.btnRegVolver);
 
@@ -61,6 +67,33 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         Intent i1 = new Intent(Registro.this, MainActivity.class);
         startActivity(i1);
        // finish();
+    }
+
+   /* public void validarCampoEmail () {
+        String email = email.getText().toString().trim();
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            email.setError("Correo inválido");
+            return;
+        }
+    }*/
+
+    private boolean validarCampoEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        if (!pattern.matcher(email).matches()){
+
+            error= "Email invalido";
+
+        }
+        return pattern.matcher(email).matches();
+    }
+
+    private boolean validarPass (String pass){//controla que la estructura de mail tenga los campos necesarios
+        Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=\\S+$).{8,}$");
+        if (!pass.matches(String.valueOf(pattern))){
+            error= "La contraseña debe tener al menos 8 caracteres númericos.";
+        }
+        return pass.matches(String.valueOf(pattern));
     }
 
     private void registrarUsuario() {
