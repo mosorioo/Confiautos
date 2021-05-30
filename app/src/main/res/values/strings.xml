@@ -62,6 +62,6 @@
     <string name="modelo">Modelo</string>
     <string name="nro_chasis">Nro. Chasis</string>
     <string name="nro_motor">Nro. Motor</string>
-    <string name="año">Año</string>
+    <string name="año">ano</string>
     <string name="auto">auto</string>
 </resources>

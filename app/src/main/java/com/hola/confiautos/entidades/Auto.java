@@ -1,14 +1,12 @@
 package com.hola.confiautos.entidades;
 
-import android.content.Intent;
-
 public class Auto {
 
     private Integer id;
     private Integer idUsuario;
     private String marca;
     private String modelo;
-    private Integer año;
+    private Integer anio;
     private String nroMotor;
     private String nroChasis;
     private String fotoAuto;
@@ -19,7 +17,7 @@ public class Auto {
         this.idUsuario = idUsuario;
         this.marca = marca;
         this.modelo = modelo;
-        this.año = año;
+        this.anio = año;
         this.nroMotor = nroMotor;
         this.nroChasis = nroChasis;
         this.fotoAuto = fotoAuto;
@@ -65,12 +63,12 @@ public class Auto {
         this.modelo = modelo;
     }
 
-    public Integer getAño() {
-        return año;
+    public Integer getAnio() {
+        return anio;
     }
 
-    public void setAño(Integer año) {
-        this.año = año;
+    public void setAnio(Integer anio) {
+        this.anio = anio;
     }
 
     public String getNroMotor() {

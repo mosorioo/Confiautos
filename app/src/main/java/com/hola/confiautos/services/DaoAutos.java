@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.hola.confiautos.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
-import com.hola.confiautos.entidades.Usuario;
 
 import static com.hola.confiautos.utilidades.Utilidades.AÑO;
 import static com.hola.confiautos.utilidades.Utilidades.ID_USUARIO;
@@ -24,7 +23,7 @@ public class DaoAutos {
 
         SQLiteDatabase db = conn.getWritableDatabase();
         String insert = "INSERT INTO " + TABLA_MIS_AUTOS +" ( " + ID_USUARIO + "," + MARCA + "," + MODELO + "," + AÑO + "," + NRO_MOTOR + "," + NRO_CHASIS + ") " +
-                "VALUES ('"+ auto.getIdUsuario() + "' , '" + auto.getMarca() + "' , '" + auto.getModelo() + "' , '" + auto.getAño() + "' , '" + auto.getNroMotor() + "' , '" + auto.getNroChasis() + "')";
+                "VALUES ('"+ auto.getIdUsuario() + "' , '" + auto.getMarca() + "' , '" + auto.getModelo() + "' , '" + auto.getAnio() + "' , '" + auto.getNroMotor() + "' , '" + auto.getNroChasis() + "')";
 
         db.execSQL(insert);
         db.close();
