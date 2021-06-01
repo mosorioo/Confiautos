@@ -47,7 +47,7 @@
             android:ems="10"
             android:hint="@string/leyendaUsuario"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
+            android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/errorUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
             android:ems="10"
             android:hint="@string/leyendaPass"
             android:importantForAutofill="no"
-            android:inputType="none|textPassword"
+            android:inputType="numberPassword"
             app:layout_constraintBottom_toTopOf="@+id/errorPass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
             android:ems="10"
             android:hint="@string/leyendaConfPass"
             android:importantForAutofill="no"
-            android:inputType="textPassword"
+            android:inputType="numberPassword"
             app:layout_constraintBottom_toTopOf="@+id/errorConfPass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
             android:ems="10"
             android:hint="@string/leyendaTlf"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
+            android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/errorTelefono"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +168,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnRegRegistrar"
             app:layout_constraintTop_toBottomOf="@+id/errorEmail"
-            app:layout_constraintVertical_bias="0.958" />
+            app:layout_constraintVertical_bias="0.814" />
 
         <TextView
             android:id="@+id/errorEmail"

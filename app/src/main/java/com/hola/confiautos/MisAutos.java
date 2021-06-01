@@ -44,7 +44,7 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         conxDB=new ConexionSQLiteHelper(this,null,1);
         mListView=findViewById(R.id.listAutos);
 
-        llenarBasePrueba();
+       // llenarBasePrueba();
         consultarBase();
 
         mAdapter=new AutoAdaptador(this,R.layout.card_view_auto,mListAutos);
@@ -87,6 +87,7 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
     }
 
     //Solo para la prueba rapida
+    /*
     private void llenarBasePrueba() {
 
         SQLiteDatabase db=conxDB.getWritableDatabase();
@@ -102,7 +103,7 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
             Long idresultante=db.insert(Utilidades.TABLA_MIS_AUTOS,Utilidades.ID_AUTO,values);
         }
 
-    }
+    }*/
 
     private void consultarBase() {
 
