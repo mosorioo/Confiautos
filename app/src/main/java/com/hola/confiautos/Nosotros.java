@@ -1,7 +1,9 @@
 package com.hola.confiautos;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +33,9 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     Usuario user;
     String message = "¡Hola! Me gustaria obtener información sobre sus servicios";
     String phoneNo = "+5491164949961";
+
+    int REQUESTCODE = 200; //Valor para saber si el usuario acepto el permiso
+    @RequiresApi(api = Build.VERSION_CODES.M)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,7 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     }
 
     //Metodo para Boton Llamar
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void llamar() {
         // Este va directo al a llamar, no realiza la llamada
 
@@ -79,14 +86,14 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
         String dial = "tel:" + phoneNo;
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
 
-
-      /*  //Este realiza la llamada directamente
+        //Este realiza la llamada directamente
         // No funciona
+      /*
        Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("1164949961"));
         if(ActivityCompat.checkSelfPermission(Nosotros.this, Manifest.permission.CALL_PHONE)!=
                 PackageManager.PERMISSION_GRANTED)
             return;
-        startActivity(i1);*/
+        startActivity(i1); */
     }
 
     //Metodo para Boton Mensaje
@@ -96,6 +103,22 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
         Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNo));
         smsIntent.putExtra("sms_body", message);
         startActivity(smsIntent);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void verificarPermisos(){
+        int permisoSms = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        int permisoCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        int permisoAlmacenamiento = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        //Ver de hacerlo al reves
+        if(permisoSms == PackageManager.PERMISSION_GRANTED && permisoCall == PackageManager.PERMISSION_GRANTED
+                && permisoAlmacenamiento == PackageManager.PERMISSION_GRANTED){
+            //Toast.makeText(this, "Permisos Concedidos", Toast.LENGTH_SHORT).show();
+        } else {
+            requestPermissions( new String[]{Manifest.permission.SEND_SMS, Manifest.permission.CALL_PHONE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTCODE);
+        }
     }
 
     //Metodo para Boton whatsApp
