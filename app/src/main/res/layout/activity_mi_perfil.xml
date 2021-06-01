@@ -13,22 +13,72 @@
         <!-- para comentar -->
 
         <TextView
-            android:id="@+id/txtErrorPerfil"
-            android:layout_width="322dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/error"
+            android:id="@+id/errorPerfilUsuario"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorUsuario"
             android:textAlignment="center"
             android:textColor="#DD0F0F"
-            android:textSize="14sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btnEditGuardar"
+            app:layout_constraintBottom_toTopOf="@+id/editPassword"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/editUsuario" />
+
+        <TextView
+            android:id="@+id/errorPerfilPassword"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorPass"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/editConfPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+
+        <TextView
+            android:id="@+id/errorPerfilConfPass2"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorConfPass"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/editNombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editConfPassword" />
+
+        <TextView
+            android:id="@+id/errorPerfilNombreApe"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorNombreApe"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/editNroTelefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editNombre" />
 
         <ImageView
             android:id="@+id/logo"
@@ -48,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/actualizar_datos_personales"
             android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/editUsuario"
@@ -61,15 +111,16 @@
             android:id="@+id/editUsuario"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:enabled="false"
             android:hint="@string/nombre_de_usuario"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editPassword"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilUsuario"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textActualizarDatosPersona" />
 
@@ -77,98 +128,78 @@
             android:id="@+id/editPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/editConfPassword"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilPassword"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editUsuario"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilUsuario" />
 
         <EditText
             android:id="@+id/editConfPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/confirmar_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/editNombre"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilConfPass2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilPassword" />
 
         <EditText
             android:id="@+id/editNombre"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/nombre"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editApellido"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editConfPassword"
-            app:layout_constraintVertical_bias="1.0"
-            android:importantForAutofill="no" />
-
-        <EditText
-            android:id="@+id/editApellido"
-            android:layout_width="284dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/apellido"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editNroTelefono"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilNombreApe"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editNombre" />
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilConfPass2" />
 
         <EditText
             android:id="@+id/editNroTelefono"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/nro_de_telefono"
             android:importantForAutofill="no"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/editEmail"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilTelefono"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editApellido" />
-
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="284dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="148dp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editNroTelefono" />
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilNombreApe" />
 
         <Button
             android:id="@+id/btnEditGuardar"
             android:layout_width="160dp"
             android:layout_height="47dp"
             android:layout_margin="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
             android:text="@string/guardar"
@@ -177,16 +208,64 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnEditVolver"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilEmail" />
+
+        <TextView
+            android:id="@+id/errorPerfilEmail"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/errorEmail"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnEditGuardar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+
+        <TextView
+            android:id="@+id/errorPerfilTelefono"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorTelefono"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/editEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editNroTelefono" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="284dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/errorPerfilEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilTelefono" />
 
         <Button
             android:id="@+id/btnEditVolver"
             android:layout_width="160dp"
             android:layout_height="47dp"
             android:layout_margin="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:onClick="Volver"
             android:text="@string/volver"
@@ -195,7 +274,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnEditGuardar"
-            app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/errorPerfilEmail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
