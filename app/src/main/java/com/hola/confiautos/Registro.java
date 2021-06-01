@@ -21,13 +21,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     EditText us, pas, confpas, nom, tel, email; //ape,
     Button btnReg, btnVolv;
     DaoUsuario dao = new DaoUsuario();
-    TextView errorDatos;
+    TextView eUser, ePass, eConfPass, eNombreApe, eTel, eEmail;
     String error;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
         us = findViewById(R.id.regUsuario);
         pas = findViewById(R.id.regPassword);
         confpas = findViewById(R.id.regConfPassword);
@@ -37,6 +39,14 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         email = findViewById(R.id.regEmail);
         btnReg = findViewById(R.id.btnRegRegistrar);
         btnVolv = findViewById(R.id.btnRegVolver);
+
+        eUser = findViewById(R.id.errorUser);
+        ePass = findViewById(R.id.errorPass);
+        eConfPass = findViewById(R.id.errorConfPass);
+        eNombreApe = findViewById(R.id.errorNombreApe);
+        eTel = findViewById(R.id.errorTelefono);
+        eEmail = findViewById(R.id.errorEmail);
+
 
         // reg = (Button) findViewById(R.id.btnRegRegistrar);
         // volv = (Button) findViewById(R.id.btnRegVolver);

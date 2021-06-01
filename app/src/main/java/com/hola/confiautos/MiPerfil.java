@@ -25,19 +25,29 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
     Integer id = 0;
     Intent x;
 
+    TextView eUser, ePass, eConfPass, eNombreApe, eTel, eEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_perfil);
-        us = (EditText) findViewById(R.id.editUsuario);
-        pas = (EditText) findViewById(R.id.editPassword);
-        nom = (EditText) findViewById(R.id.editNombre);
-        //ape = (EditText) findViewById(R.id.editApellido);
-        tel = (EditText) findViewById(R.id.editNroTelefono);
-        email = (EditText) findViewById(R.id.editEmail);
-        btnGuard = (Button) findViewById(R.id.btnEditGuardar);
-        btnVolv = (Button) findViewById(R.id.btnEditVolver);
+        us = findViewById(R.id.editUsuario);
+        pas = findViewById(R.id.editPassword);
+        nom = findViewById(R.id.editNombre);
+        //ape = findViewById(R.id.editApellido);
+        tel = findViewById(R.id.editNroTelefono);
+        email = findViewById(R.id.editEmail);
+        btnGuard = findViewById(R.id.btnEditGuardar);
+        btnVolv = findViewById(R.id.btnEditVolver);
+
+        eUser = findViewById(R.id.errorPerfilUsuario);
+        ePass = findViewById(R.id.errorPerfilPassword);
+        eConfPass = findViewById(R.id.errorPerfilConfPass);
+        eNombreApe = findViewById(R.id.errorPerfilNombreApe);
+        eTel = findViewById(R.id.errorPerfilTelefono);
+        eEmail = findViewById(R.id.errorPerfilEmail);
+
         //dao=new daoUsuario(this);
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MiPerfil.this);
 
