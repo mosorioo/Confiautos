@@ -6,7 +6,7 @@
     <string name="todo">TODO</string>
     <string name="apellido">Apellido</string>
     <string name="password">Password</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Nombre y Apellido</string>
     <string name="registroUsuario">Registro de Usuario</string>
     <string name="confirmar_password">Confirmar Password</string>
     <string name="nro_de_telefono">Nro. de Teléfono</string>
@@ -71,4 +71,10 @@
     <string name="agregarAuto">Cargar los datos del Auto</string>
     <string name="agregarFotoAuto">Agregue una foto del auto</string>
     <string name="todoo">TODO</string>
+    <string name="errorUsuario">El usuario debe tener al menos 6 letras.</string>
+    <string name="errorPass">La contraseña debe tener al menos 6 números.</string>
+    <string name="errorConfPass">La contraseñas ingresadas deben coincidir.</string>
+    <string name="errorNombreApe">Debe ingresar su nombre y Apellido, solo letras.</string>
+    <string name="errorTelefono">El telefono debe contener al menos 10 números.</string>
+    <string name="errorEmail">El e-mail ingresado no cumple con el formato de e-mail.</string>
 </resources>

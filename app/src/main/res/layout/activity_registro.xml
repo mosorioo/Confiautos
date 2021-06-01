@@ -29,8 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
+            android:layout_marginBottom="26dp"
             android:text="@string/registroUsuario"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/regUsuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -39,114 +41,230 @@
             android:id="@+id/regUsuario"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/leyendaUsuario"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="319dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorUser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textRegistroPersona" />
 
         <EditText
             android:id="@+id/regPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/leyendaPass"
             android:importantForAutofill="no"
             android:inputType="none|textPassword"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="366dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorPass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorUser" />
 
         <EditText
             android:id="@+id/regConfPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/leyendaConfPass"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="425dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorConfPass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorPass" />
 
         <EditText
             android:id="@+id/regNombre"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/nombre"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="191dp" />
-
-        <EditText
-            android:id="@+id/regApellido"
-            android:layout_width="284dp"
-            android:layout_height="47dp"
-            android:ems="10"
-            android:hint="@string/apellido"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="264dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorNombreApe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorConfPass" />
 
         <EditText
             android:id="@+id/regNroTelefono"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/leyendaTlf"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="497dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorTelefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorNombreApe" />
 
         <EditText
             android:id="@+id/regEmail"
             android:layout_width="284dp"
             android:layout_height="47dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="none|textEmailAddress"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="596dp" />
+            app:layout_constraintBottom_toTopOf="@+id/errorEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorTelefono" />
 
         <Button
             android:id="@+id/btnRegRegistrar"
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:layout_margin="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
             android:text="@string/registrar"
             android:textColor="#A62A2A"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="711dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRegVolver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorEmail" />
 
         <Button
             android:id="@+id/btnRegVolver"
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:layout_margin="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
             android:text="@string/volver"
             android:textColor="#A62A2A"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="219dp"
-            tools:layout_editor_absoluteY="711dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnRegRegistrar"
+            app:layout_constraintTop_toBottomOf="@+id/errorEmail"
+            app:layout_constraintVertical_bias="0.958" />
 
         <TextView
-            android:id="@+id/errorDatos"
+            android:id="@+id/errorEmail"
             android:layout_width="347dp"
             android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/errorEmail"
             android:textAlignment="center"
             android:textColor="#DD0F0F"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="660dp" />
+            app:layout_constraintBottom_toTopOf="@+id/btnRegRegistrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+
+        <TextView
+            android:id="@+id/errorUser"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorUsuario"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/regPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regUsuario" />
+
+        <TextView
+            android:id="@+id/errorPass"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorPass"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/regConfPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regPassword" />
+
+        <TextView
+            android:id="@+id/errorConfPass"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorConfPass"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/regNombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regConfPassword" />
+
+        <TextView
+            android:id="@+id/errorNombreApe"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorNombreApe"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/regNroTelefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regNombre" />
+
+        <TextView
+            android:id="@+id/errorTelefono"
+            android:layout_width="347dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/errorTelefono"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/regEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regNroTelefono" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
