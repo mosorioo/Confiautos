@@ -29,10 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:layout_marginBottom="25dp"
             android:text="@string/registroUsuario"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/regUsuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -41,157 +39,114 @@
             android:id="@+id/regUsuario"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="@string/leyendaUsuario"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/regPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textRegistroPersona" />
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="319dp" />
 
         <EditText
             android:id="@+id/regPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/leyendaPass"
             android:importantForAutofill="no"
             android:inputType="none|textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/regConfPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regUsuario"
-            app:layout_constraintVertical_bias="1.0" />
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="366dp" />
 
         <EditText
             android:id="@+id/regConfPassword"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/leyendaConfPass"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/regNombre"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regPassword" />
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="425dp" />
 
         <EditText
             android:id="@+id/regNombre"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/nombre"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/regApellido"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regConfPassword"
-            app:layout_constraintVertical_bias="1.0"
-            android:importantForAutofill="no" />
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="191dp" />
 
         <EditText
             android:id="@+id/regApellido"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/apellido"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/regNroTelefono"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regNombre" />
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="264dp" />
 
         <EditText
             android:id="@+id/regNroTelefono"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/leyendaTlf"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/regEmail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regApellido" />
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="497dp" />
 
         <EditText
             android:id="@+id/regEmail"
             android:layout_width="284dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="150dp"
             android:ems="10"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="none|textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regNroTelefono" />
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="596dp" />
 
         <Button
             android:id="@+id/btnRegRegistrar"
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:layout_margin="20dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="85dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
             android:text="@string/registrar"
             android:textColor="#A62A2A"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnRegVolver"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="711dp" />
 
         <Button
             android:id="@+id/btnRegVolver"
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:layout_margin="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="85dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
             android:text="@string/volver"
             android:textColor="#A62A2A"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnRegRegistrar"
-            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+            tools:layout_editor_absoluteX="219dp"
+            tools:layout_editor_absoluteY="711dp" />
 
         <TextView
             android:id="@+id/errorDatos"
             android:layout_width="347dp"
             android:layout_height="24dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="17dp"
             android:textAlignment="center"
             android:textColor="#DD0F0F"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btnRegRegistrar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regEmail" />
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="660dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,23 +6,23 @@ public class Usuario {
     private String usuario;
     private String password;
     private String nombre;
-    private String apellido;
+ //   private String apellido;
     private String telefono;
     private String email;
 
     //constructor
-    public Usuario(Integer id, String usuario, String password, String nombre, String apellido, String telefono, String email) {
+    public Usuario(Integer id, String usuario, String password, String nombre, String telefono, String email) { //String apellido
         this.id = id;
         this.usuario = usuario;
         this.password = password;
         this.nombre = nombre;
-        this.apellido = apellido;
+    //    this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
     }
 
-    public Usuario(String usuario, String password, String nombre, String apellido, String telefono, String email) {
-        this(null, usuario, password, nombre, apellido, telefono, email);
+    public Usuario(String usuario, String password, String nombre, String telefono, String email) { //String apellido,
+        this(null, usuario, password, nombre, telefono, email); //apellido
     }
 
     public Usuario() {
@@ -61,13 +61,14 @@ public class Usuario {
         this.nombre = nombre;
     }
 
+    /*
     public String getApellido() {
         return apellido;
     }
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
+    }*/
 
     public String getTelefono() {
         return telefono;
@@ -86,7 +87,7 @@ public class Usuario {
     }
 
     public boolean isNullSinUser() {
-        if (password.equals("") && nombre.equals("") && apellido.equals("") && telefono.equals("") && email.equals("")) {
+        if (password.equals("") && nombre.equals("") && telefono.equals("") && email.equals("")) { //&& apellido.equals("")
             return false;
         } else {
             return true;

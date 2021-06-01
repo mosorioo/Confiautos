@@ -18,7 +18,7 @@ import com.hola.confiautos.services.DaoUsuario;
 import java.util.regex.Pattern;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
-    EditText us, pas, confpas, nom, ape, tel, email;
+    EditText us, pas, confpas, nom, tel, email; //ape,
     Button btnReg, btnVolv;
     DaoUsuario dao = new DaoUsuario();
     TextView errorDatos;
@@ -32,7 +32,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         pas = findViewById(R.id.regPassword);
         confpas = findViewById(R.id.regConfPassword);
         nom = findViewById(R.id.regNombre);
-        ape = findViewById(R.id.regApellido);
+      //  ape = findViewById(R.id.regApellido);
         tel = findViewById(R.id.regNroTelefono);
         email = findViewById(R.id.regEmail);
         btnReg = findViewById(R.id.btnRegRegistrar);
@@ -97,39 +97,21 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void registrarUsuario() {
-        Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString());
+        Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()); //ape.getText().toString(),
         Integer existe = dao.validarUsuario(usuario, this);
         //Integer existe = 0;
         dao.buscarUsuarios(Registro.this);
         if (existe > 0) {
             Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
-            ((EditText) findViewById(R.id.regUsuario)).setText("");
-            ((EditText) findViewById(R.id.regPassword)).setText("");
-            ((EditText) findViewById(R.id.regConfPassword)).setText("");
-            ((EditText) findViewById(R.id.regNombre)).setText("");
-            ((EditText) findViewById(R.id.regApellido)).setText("");
-            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
-            ((EditText) findViewById(R.id.regEmail)).setText("");
-        } else if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), ape.getText().toString(), tel.getText().toString(), email.getText().toString())) {
+            limpiarTodo();
+        } else if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString())) { //ape.getText().toString(),
             Toast.makeText(this, "ERROR: Campos Vacios", Toast.LENGTH_LONG).show();
-            ((EditText) findViewById(R.id.regUsuario)).setText("");
-            ((EditText) findViewById(R.id.regPassword)).setText("");
-            ((EditText) findViewById(R.id.regConfPassword)).setText("");
-            ((EditText) findViewById(R.id.regNombre)).setText("");
-            ((EditText) findViewById(R.id.regApellido)).setText("");
-            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
-            ((EditText) findViewById(R.id.regEmail)).setText("");
+            limpiarTodo();
         }
         else {
             dao.createUsuario(usuario, this);
             Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
-            ((EditText) findViewById(R.id.regUsuario)).setText("");
-            ((EditText) findViewById(R.id.regPassword)).setText("");
-            ((EditText) findViewById(R.id.regConfPassword)).setText("");
-            ((EditText) findViewById(R.id.regNombre)).setText("");
-            ((EditText) findViewById(R.id.regApellido)).setText("");
-            ((EditText) findViewById(R.id.regNroTelefono)).setText("");
-            ((EditText) findViewById(R.id.regEmail)).setText("");
+            limpiarTodo();
             Intent i = new Intent(Registro.this, MainActivity.class);
             startActivity(i);
             finish();
@@ -139,6 +121,16 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void limpiarTodo() {
+        us.setText("");
+        pas.setText("");
+        confpas.setText("");
+        nom.setText("");
+       // ape.setText("");
+        tel.setText("");
+        email.setText("");
     }
 }
 

@@ -21,8 +21,8 @@ public class DaoUsuario {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper((Context) context, null, 1);
 
         SQLiteDatabase db = conn.getWritableDatabase();
-        String insert = "INSERT INTO " + TABLA_USUARIO +" ( " + USUARIO + "," + PASSWORD + "," + NOMBRE + "," + APELLIDO + "," + TELEFONO + "," + EMAIL + ") " +
-                "VALUES ('"+ usuario.getUsuario() + "' , '" + usuario.getPassword() + "' , '" + usuario.getNombre() + "' , '" + usuario.getApellido() + "' , '" + usuario.getTelefono() + "' , '" + usuario.getEmail() + "')";
+        String insert = "INSERT INTO " + TABLA_USUARIO +" ( " + USUARIO + "," + PASSWORD + "," + NOMBRE + "," + TELEFONO + "," + EMAIL + ") " + //," + APELLIDO + "
+                "VALUES ('"+ usuario.getUsuario() + "' , '" + usuario.getPassword() + "' , '" + usuario.getNombre() + "' , '" + usuario.getTelefono() + "' , '" + usuario.getEmail() + "')"; //, '" + usuario.getApellido() + "'
 
         db.execSQL(insert);
         db.close();
@@ -60,7 +60,7 @@ public class DaoUsuario {
         usuario.setUsuario(c.getString(c.getColumnIndex(USUARIO)));
         usuario.setPassword(c.getString(c.getColumnIndex(PASSWORD)));
         usuario.setNombre(c.getString(c.getColumnIndex(NOMBRE)));
-        usuario.setApellido(c.getString(c.getColumnIndex(APELLIDO)));
+       // usuario.setApellido(c.getString(c.getColumnIndex(APELLIDO)));
         usuario.setTelefono(c.getString(c.getColumnIndex(TELEFONO)));
         usuario.setEmail(c.getString(c.getColumnIndex(EMAIL)));
         return usuario;
@@ -116,16 +116,16 @@ public class DaoUsuario {
         return exist;
     }
 
-    public boolean isNull(String u, String p, String n, String a, String t, String e) {
-        if (u.equals("") || p.equals("") || n.equals("") || a.equals("") || t.equals("") || e.equals("")) {
+    public boolean isNull(String u, String p, String n, String t, String e) { //String a,
+        if (u.equals("") || p.equals("") || n.equals("") || t.equals("") || e.equals("")) { //|| a.equals("")
             return false;
         } else {
             return true;
         }
     }
 
-    public boolean isNullSinUser(String p, String n, String a, String t, String e) {
-        if (p.equals("") || n.equals("") || a.equals("") || t.equals("") || e.equals("")) {
+    public boolean isNullSinUser(String p, String n, String t, String e) { //String a,
+        if (p.equals("") || n.equals("") || t.equals("") || e.equals("")) { // || a.equals("")
             return false;
         } else {
             return true;
@@ -140,7 +140,7 @@ public class DaoUsuario {
         ContentValues cv= new ContentValues();
         cv.put(PASSWORD, user.getPassword());
         cv.put(NOMBRE, user.getNombre());
-        cv.put(APELLIDO, user.getApellido());
+       // cv.put(APELLIDO, user.getApellido());
         cv.put(TELEFONO, user.getTelefono());
         cv.put(EMAIL, user.getEmail());
         int row = db.update( TABLA_USUARIO, cv, "id="+ user.getId(), null);

@@ -16,7 +16,7 @@ import com.hola.confiautos.services.DaoUsuario;
 
 public class MiPerfil extends AppCompatActivity implements View.OnClickListener {
 
-    EditText us, pas, nom, ape, tel, email;
+    EditText us, pas, nom, tel, email; //ape,
     Button btnGuard, btnVolv;
     TextView error;
     private View v;
@@ -33,7 +33,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
         us = (EditText) findViewById(R.id.editUsuario);
         pas = (EditText) findViewById(R.id.editPassword);
         nom = (EditText) findViewById(R.id.editNombre);
-        ape = (EditText) findViewById(R.id.editApellido);
+        //ape = (EditText) findViewById(R.id.editApellido);
         tel = (EditText) findViewById(R.id.editNroTelefono);
         email = (EditText) findViewById(R.id.editEmail);
         btnGuard = (Button) findViewById(R.id.btnEditGuardar);
@@ -47,7 +47,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
         us.setText(user.getUsuario());
         pas.setText(user.getPassword());
         nom.setText(user.getNombre());
-        ape.setText(user.getApellido());
+      //  ape.setText(user.getApellido());
         tel.setText(user.getTelefono());
         email.setText(user.getEmail());
 
@@ -76,7 +76,7 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
         user.setUsuario(us.getText().toString());
         user.setPassword(pas.getText().toString());
         user.setNombre(nom.getText().toString());
-        user.setApellido(ape.getText().toString());
+      //  user.setApellido(ape.getText().toString());
         user.setTelefono(tel.getText().toString());
         user.setEmail(email.getText().toString());
 
