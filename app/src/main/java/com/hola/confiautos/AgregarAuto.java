@@ -1,15 +1,21 @@
 package com.hola.confiautos;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -30,7 +36,7 @@ import com.hola.confiautos.utilidades.Utilidades;
 import java.io.File;
 import java.io.IOException;
 
-public class AgregarAuto extends AppCompatActivity {
+public class AgregarAuto<onActivityResult> extends AppCompatActivity {
 
     EditText campoMarca, campoModelo, campoAnio, campoNroMotor, campoNroChasis;
     Button btnGuardar, btnCancelar, btnCargarFoto, btnTomarFoto;
@@ -41,6 +47,8 @@ public class AgregarAuto extends AppCompatActivity {
     int imagen;
     private Bitmap imgToStorage; //Otro Formato para almacenar fotos.
     String error, direccionUriImg; //almacena la dirección de donde se guarda la imagen
+    private static final int REQUEST_PERMISSION_CODE = 100;
+    private static final int REQUEST_IMAGE_GALLERY = 101;
 
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
@@ -84,9 +92,19 @@ public class AgregarAuto extends AppCompatActivity {
         btnCargarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarFotoGaleria();
-            }
 
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                        //cargarFotoGaleria();
+                        abrirGaleria();
+                    }else{
+                        ActivityCompat.requestPermissions(AgregarAuto.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+                    }
+                }else{
+                    //cargarFotoGaleria();
+                    abrirGaleria();
+                }
+            }
         });
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +118,7 @@ public class AgregarAuto extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarDatos()){
+                if (validarCamposVacios()){
                     guardarAuto();
                 } else {
                     errorDatos.setVisibility(View.VISIBLE);
@@ -118,8 +136,43 @@ public class AgregarAuto extends AppCompatActivity {
             }
         });
 
+    }
 
+    //youtube
+    //para la galeria
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE_GALLERY){
+            if(resultCode== Activity.RESULT_OK && data != null){
+                Uri foto = data.getData();
+                fotoAuto.setImageURI(foto);
+            }else{
+                Log.i("TAG", "Result: "+resultCode);
+                Toast.makeText(this, "No se seleccionó ninguna foto", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
+    //youtube
+    //para la galeria
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        if(requestCode==REQUEST_PERMISSION_CODE){
+            if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                abrirGaleria();
+            }else{
+                Toast.makeText(this, "Debe habilitar los permisos", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    //youtube
+    //para la galeria
+    private void abrirGaleria (){
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.setType("image/*");
+        startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
 
     private void guardarAuto(){
@@ -150,7 +203,7 @@ public class AgregarAuto extends AppCompatActivity {
 
     }
 
-    private boolean validarDatos(){
+    private boolean validarCamposVacios(){
         String marca = campoMarca.getText().toString();
         String modelo = campoModelo.getText().toString();
         String anio = campoAnio.getText().toString();
@@ -161,9 +214,15 @@ public class AgregarAuto extends AppCompatActivity {
             if(nroMotor.length()==9){
                 return true;
             } else{
-                error = "errorrr";
+                error = "El nro de motor debe contener 9 dígitos.";
                 return false;
             }
+           /* if(campoNroChasis.length()==12){
+                return true;
+            } else{
+                error = "El nro. de chasis debe contener 12 dígitos.";
+                return false;
+            }*/
         }else {
             error = "Todos los campos deben ser completados";
             return false;
@@ -187,11 +246,10 @@ public class AgregarAuto extends AppCompatActivity {
             Log.e("Error", ex.toString());// si no se genero el archivo por un error lo informa
         }
         if (imagenArchivo != null) {//si tiene foto sacada, la guarda
-            imagenUri = FileProvider.getUriForFile(this, "com.example..fileprovider", imagenArchivo); //faltaaaaaaaa
+            imagenUri = FileProvider.getUriForFile(this, "com.example.hola.confiautos.fileprovider", imagenArchivo); //faltaaaaaaaa
             imagen =100;//numero que se asigna para la camara
             i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);//guarda la imagen y va a la linea siguiente
             startActivityForResult(i, imagen);
-
         }
     }
 
@@ -203,6 +261,7 @@ public class AgregarAuto extends AppCompatActivity {
         return imagen;
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -216,5 +275,5 @@ public class AgregarAuto extends AppCompatActivity {
             imgToStorage= BitmapFactory.decodeFile(imagenfile.getAbsolutePath());
             fotoAuto.setImageBitmap(imgToStorage);
         }
-    }
+    }*/
 }

@@ -80,7 +80,9 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     //Metodo para Boton Llamar
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void llamar() {
-        // Este va directo al a llamar, no realiza la llamada
+        // Este va directo a llamar, no realiza la llamada
+
+        verificarPermisoCall();
 
         String phoneNo = "1164949961";
         String dial = "tel:" + phoneNo;
@@ -97,8 +99,11 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     }
 
     //Metodo para Boton Mensaje
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void mensaje() {
         // Toast.makeText(this, "Funciona el Boton Mensaje", Toast.LENGTH_LONG).show();
+
+        verificarPermisoSms();
 
         Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNo));
         smsIntent.putExtra("sms_body", message);
@@ -106,20 +111,30 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void verificarPermisos(){
+    public void verificarPermisoSms(){
         int permisoSms = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+
+        //Ver de hacerlo al reves
+        if(permisoSms == PackageManager.PERMISSION_GRANTED){
+            //Toast.makeText(this, "Permisos Concedidos", Toast.LENGTH_SHORT).show();
+        } else {
+            requestPermissions( new String[]{Manifest.permission.SEND_SMS}, REQUESTCODE);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void verificarPermisoCall(){
         int permisoCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int permisoAlmacenamiento = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         //Ver de hacerlo al reves
-        if(permisoSms == PackageManager.PERMISSION_GRANTED && permisoCall == PackageManager.PERMISSION_GRANTED
-                && permisoAlmacenamiento == PackageManager.PERMISSION_GRANTED){
+        if(permisoCall == PackageManager.PERMISSION_GRANTED){
             //Toast.makeText(this, "Permisos Concedidos", Toast.LENGTH_SHORT).show();
         } else {
-            requestPermissions( new String[]{Manifest.permission.SEND_SMS, Manifest.permission.CALL_PHONE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTCODE);
+            requestPermissions( new String[]{Manifest.permission.CALL_PHONE}, REQUESTCODE);
         }
     }
+
 
     //Metodo para Boton whatsApp
     private void whatsApp() {
