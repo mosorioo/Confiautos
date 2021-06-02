@@ -1,18 +1,22 @@
 package com.hola.confiautos;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,6 +38,8 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
     String message = "¡Hola! Me gustaria obtener información sobre sus servicios";
     String phoneNo = "+5491164949961";
 
+    private static final int REQUEST_PERMISSION_CALL =100;
+
     int REQUESTCODE = 200; //Valor para saber si el usuario acepto el permiso
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -51,7 +57,22 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
         iBtnLLamada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llamar();
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+                    llamar();
+                } else{
+                    Log.i("TAG", "API >23");
+                    if(ContextCompat.checkSelfPermission(Nosotros.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+                        Log.i("TAG", "Permiso habilitado");
+                        llamar();
+                    }else{
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(Nosotros.this, Manifest.permission.CALL_PHONE)){ //true
+                            Log.i("TAG", "Los permisos se encuentran rechazados");
+                        }else{
+                            Log.i("TAG", "Solicitud de permisos");
+                        }
+                        ActivityCompat.requestPermissions(Nosotros.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PERMISSION_CALL);
+                    }
+                }
             }
         });
 
@@ -77,25 +98,60 @@ public class Nosotros extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSION_CALL){
+            if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.i("TAG", "Permiso Solicitado (Request)");
+                llamar();
+            }else{
+                Log.i("TAG", "Permiso denegado (Request)");
+                if(ActivityCompat.shouldShowRequestPermissionRationale(Nosotros.this, Manifest.permission.CALL_PHONE)){ //true
+                    new AlertDialog.Builder(this).setMessage("Debe habilitar los permisos")
+                            .setPositiveButton("Vuelva a intentarlo", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityCompat.requestPermissions(Nosotros.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PERMISSION_CALL);
+                                }
+                            })
+                            .setNegativeButton("No, gracias.", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //No hizo nada
+                                    Log.i("TAG", "Se fue sin hacer nada");
+                                }
+                            }).show();
+
+                }else{
+                    Toast.makeText(this, "Debe habilitar los permisos de manera manual", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     //Metodo para Boton Llamar
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    //@RequiresApi(api = Build.VERSION_CODES.M)
     private void llamar() {
         // Este va directo a llamar, no realiza la llamada
 
-        verificarPermisoCall();
+      //  verificarPermisoCall();
 
         String phoneNo = "1164949961";
-        String dial = "tel:" + phoneNo;
-        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
+       /* String dial = "tel:" + phoneNo;
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial))); */
 
         //Este realiza la llamada directamente
         // No funciona
-      /*
-       Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("1164949961"));
+        /*
+        Intent i1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" +phoneNo));
         if(ActivityCompat.checkSelfPermission(Nosotros.this, Manifest.permission.CALL_PHONE)!=
                 PackageManager.PERMISSION_GRANTED)
             return;
         startActivity(i1); */
+
+        startActivity(new Intent(Intent.ACTION_CALL,Uri.parse("tel:" +phoneNo)));
+
     }
 
     //Metodo para Boton Mensaje
