@@ -28,7 +28,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         btnMisTurnos = (Button) findViewById(R.id.btnMisTurnos);
         btnMisAutos = (Button) findViewById((R.id.btnMisAutos));
         btnMiPerfil = (Button) findViewById((R.id.btnMiPerfil));
-        btnBeneficios = (Button) findViewById((R.id.btnBeneficios));
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
         user=dao.getUserbyID(getIntent().getIntExtra("Id",0), Inicio.this);

@@ -98,24 +98,6 @@
             app:layout_constraintTop_toBottomOf="@+id/btnTurnoNuevo" />
 
         <Button
-            android:id="@+id/btnBeneficios"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="284dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/beneficios"
-            android:textColor="#CA1717"
-            android:textColorHighlight="#BFB8B8"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnSalir"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnMiPerfil" />
-
-        <Button
             android:id="@+id/btnMisAutos"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="284dp"
@@ -148,7 +130,7 @@
             android:textColor="#CA1717"
             android:textColorHighlight="#BFB8B8"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnBeneficios"
+            app:layout_constraintBottom_toTopOf="@+id/btnSalir"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnMisAutos" />
@@ -170,7 +152,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBeneficios" />
+            app:layout_constraintTop_toBottomOf="@+id/btnMiPerfil" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

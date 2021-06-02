@@ -49,6 +49,8 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     String error, direccionUriImg; //almacena la dirección de donde se guarda la imagen
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALLERY = 101;
+    private static final int REQUEST_PERMISSION_CAMARA = 102;
+    private static final int REQUEST_IMAGE_CAMARA = 103;
 
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
@@ -89,6 +91,8 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         nroChasis.setText(car.getNroChasis());
         fotoAuto.setText() */
 
+        //youtube
+        //para la galeria FUNCIONA
         btnCargarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +114,17 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirCamara();
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                        //Tomar foto;
+                        goToCamara();
+                    }else{
+                        ActivityCompat.requestPermissions(AgregarAuto.this, new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CODE);
+                    }
+                }else{
+                    goToCamara();
+                }
             }
 
         });
@@ -132,14 +146,14 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 Intent i = new Intent(AgregarAuto.this, MisAutos.class);
                 i.putExtra("Id", user.getId());
                 startActivity(i);
-                // finish();
+                finish();
             }
         });
 
     }
 
     //youtube
-    //para la galeria
+    //para la galeria FUNCIONA
     @Override
     protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -152,10 +166,23 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 Toast.makeText(this, "No se seleccionó ninguna foto", Toast.LENGTH_SHORT).show();
             }
         }
+        //aqui hago el de camara
+        else if(requestCode == REQUEST_IMAGE_CAMARA){
+            if(resultCode== Activity.RESULT_OK && data != null){
+                //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                //fotoAuto.setImageBitmap(bitmap);
+                Uri foto = data.getData();
+                fotoAuto.setImageURI(foto);
+                Log.i("TAG", "Result=> "+ foto);
+            }else{
+                Log.i("TAG", "Result: "+ resultCode);
+                Toast.makeText(this, "No tomó ninguna foto", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     //youtube
-    //para la galeria
+    //para la galeria FUNCIONA
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if(requestCode==REQUEST_PERMISSION_CODE){
             if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
@@ -163,12 +190,19 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             }else{
                 Toast.makeText(this, "Debe habilitar los permisos", Toast.LENGTH_SHORT).show();
             }
+        }//aqui hago el de la camara
+        else if(requestCode == REQUEST_PERMISSION_CAMARA) {
+            if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                goToCamara();
+            }else{
+                Toast.makeText(this, "Debe habilitar los permisos", Toast.LENGTH_SHORT).show();
+            }
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     //youtube
-    //para la galeria
+    //para la galeria FUNCIONA
     private void abrirGaleria (){
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("image/*");
@@ -204,9 +238,10 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     }
 
     private boolean validarCamposVacios(){
+        //FOTO?
         String marca = campoMarca.getText().toString();
         String modelo = campoModelo.getText().toString();
-        String anio = campoAnio.getText().toString();
+        String anio = campoAnio.getText().toString(); // if(anio >1886)
         String nroMotor = campoNroMotor.getText().toString();
         String nroChasis = campoNroChasis.getText().toString();
 
@@ -229,14 +264,25 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         }
     }
 
+    /*
     private void cargarFotoGaleria(){
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         i.setType("imagen/");
         imagen =10;
         startActivityForResult(Intent.createChooser(i, "Selecciona imagen ;)"), imagen);
 
+    } */
+
+    //youtube
+    //para la camara
+    private void goToCamara(){
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(i.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(i, REQUEST_IMAGE_CAMARA); //ver como lo meto en el otro
+        }
     }
 
+    /*
     public void abrirCamara() {
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File imagenArchivo = null;
@@ -251,7 +297,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);//guarda la imagen y va a la linea siguiente
             startActivityForResult(i, imagen);
         }
-    }
+    }*/
 
     private File CrearImagen() throws IOException {
         String nombreImagen = "Foto_";
