@@ -50,9 +50,9 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
 
         //dao=new daoUsuario(this);
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MiPerfil.this);
-
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
+
         //dao= new DaoUsuario(this);
         us.setText(user.getUsuario());
         pas.setText(user.getPassword());

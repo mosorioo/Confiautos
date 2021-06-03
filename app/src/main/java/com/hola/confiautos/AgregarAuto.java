@@ -79,7 +79,6 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnCancelar = findViewById(R.id.btnRegAutoCancelar);
 
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), AgregarAuto.this);
-
         Bundle bundle = getIntent().getExtras();
         idUser = bundle.getInt("id");
 
@@ -209,34 +208,6 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
 
-    private void guardarAuto(){
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-        SQLiteDatabase db = conn.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Utilidades.ID_USUARIO, idUser); //no se si es asi
-        values.put(Utilidades.MARCA,campoMarca.getText().toString());
-        values.put(Utilidades.MODELO,campoModelo.getText().toString());
-        values.put(Utilidades.ANIO,campoAnio.getText().toString());
-        values.put(Utilidades.NRO_MOTOR,campoNroMotor.getText().toString());
-        values.put(Utilidades.NRO_CHASIS,campoNroChasis.getText().toString());
-        values.put(Utilidades.FOTO_AUTO,direccionUriImg);
-
-        Long idresultante = db.insert("Auto", "id", values);
-        if (idresultante>0){//si no lo llegó a guardar
-            btnGuardar.setEnabled(false);//deshabilito para que no lo vuelva a poner
-        }
-        else{
-            btnGuardar.setEnabled(true);
-        }
-       /* Utilidades.perroLog = (Integer)idresultante.intValue();
-        System.out.println("el valor de idresultante es:" + Utilidades.perroLog);*/
-        Toast.makeText(this, "Auto agregado" + idresultante, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(AgregarAuto.this, MisAutos.class);
-        startActivity(i);
-        finish();
-
-    }
-
     private boolean validarCamposVacios(){
         //FOTO?
         String marca = campoMarca.getText().toString();
@@ -278,7 +249,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     private void goToCamara(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(i.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(i, REQUEST_IMAGE_CAMARA); //ver como lo meto en el otro
+            startActivityForResult(i, REQUEST_IMAGE_CAMARA);
         }
     }
 
@@ -305,6 +276,35 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);//concatena el nombre de la foto, donde se guarda y el formato
         direccionUriImg = imagen.getAbsolutePath();//asignamos a la variable la direccion adonde esta la foto guardada
         return imagen;
+    }
+
+    private void guardarAuto(){
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Utilidades.ID_USUARIO, idUser); //no se si es asi == idUser
+        values.put(Utilidades.MARCA,campoMarca.getText().toString());
+        values.put(Utilidades.MODELO,campoModelo.getText().toString());
+        values.put(Utilidades.ANIO,campoAnio.getText().toString());
+        values.put(Utilidades.NRO_MOTOR,campoNroMotor.getText().toString());
+        values.put(Utilidades.NRO_CHASIS,campoNroChasis.getText().toString());
+        values.put(Utilidades.FOTO_AUTO,direccionUriImg);
+
+        Long idresultante = db.insert("Auto", "id", values);
+        if (idresultante>0){//si no lo llegó a guardar
+            btnGuardar.setEnabled(false);//deshabilito para que no lo vuelva a poner
+        }
+        else{
+            btnGuardar.setEnabled(true);
+        }
+       /* Utilidades.perroLog = (Integer)idresultante.intValue();
+        System.out.println("el valor de idresultante es:" + Utilidades.perroLog);*/
+        Toast.makeText(this, "Auto agregado" + idresultante, Toast.LENGTH_LONG).show();
+        Intent i = new Intent(AgregarAuto.this, MisAutos.class);
+        i.putExtra("Id", user.getId());
+        startActivity(i);
+        finish();
+
     }
 
     /*
