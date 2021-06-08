@@ -1,8 +1,6 @@
 package com.hola.confiautos;
 // 2do intento
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,13 +15,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
-import com.hola.confiautos.utilidades.Utilidades;
 
 import java.util.regex.Pattern;
 
-import static com.hola.confiautos.utilidades.Utilidades.EMAIL;
 import static com.hola.confiautos.utilidades.Utilidades.TABLA_USUARIO;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {

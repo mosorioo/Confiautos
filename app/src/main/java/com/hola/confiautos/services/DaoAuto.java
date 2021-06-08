@@ -3,7 +3,7 @@ package com.hola.confiautos.services;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hola.confiautos.ConexionSQLiteHelper;
+import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
 
 import static com.hola.confiautos.utilidades.Utilidades.ANIO;

@@ -1,4 +1,4 @@
-package com.hola.confiautos;
+package com.hola.confiautos.conexionSQLiteHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

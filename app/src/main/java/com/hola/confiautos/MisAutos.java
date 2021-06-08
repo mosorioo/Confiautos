@@ -2,7 +2,6 @@ package com.hola.confiautos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
 import com.hola.confiautos.entidades.AutoAdaptador;
 import com.hola.confiautos.entidades.Usuario;

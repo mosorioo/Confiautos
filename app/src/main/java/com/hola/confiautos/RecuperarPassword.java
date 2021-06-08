@@ -14,11 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 import com.hola.confiautos.utilidades.Utilidades;
-
-import java.util.Objects;
 
     public class RecuperarPassword extends AppCompatActivity {
 
@@ -98,6 +97,7 @@ import java.util.Objects;
             Cursor c= db.query(Utilidades.TABLA_USUARIO,cUsuario,Utilidades.EMAIL+"=?",parametros,null,null,null);
             c.moveToFirst();
             campoUsuario.setText(c.getString(0));
+            //agregar algo para habilitar los textbox de pass y confpass
             c.close();
         }catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El Email no existe", Toast.LENGTH_LONG).show();

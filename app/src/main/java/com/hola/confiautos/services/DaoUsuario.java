@@ -6,9 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hola.confiautos.ConexionSQLiteHelper;
+import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Usuario;
-import com.hola.confiautos.utilidades.Utilidades;
 
 import java.util.ArrayList;
 import java.util.Collection;
