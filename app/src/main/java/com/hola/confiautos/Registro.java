@@ -107,7 +107,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
    private boolean validarUsuario(String user) {
        String tablaUsuario;
 
-       if (user.length() > 5) {
+       if (user.length() == 6) {
            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
            SQLiteDatabase db = conn.getReadableDatabase();
 
@@ -129,7 +129,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
            }
        }else {
            eUser.setVisibility(View.VISIBLE);
-           //Toast.makeText(this, "El usuario debe tener al menos 6 letras", Toast.LENGTH_LONG).show();
+           //Toast.makeText(this, "El usuario debe tener 6 letras", Toast.LENGTH_LONG).show();
            return false;
        }
    }
@@ -288,6 +288,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    private void ocultarValidaciones (){
+        eUser.setVisibility(View.INVISIBLE);
+        ePass.setVisibility(View.INVISIBLE);
+        eConfPass.setVisibility(View.INVISIBLE);
+        eNombreApe.setVisibility(View.INVISIBLE);
+        eTel.setVisibility(View.INVISIBLE);
+        eEmail.setVisibility(View.INVISIBLE);
+    }
+
     private void registrarUsuario() {
         Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()); //ape.getText().toString(),
         dao.createUsuario(usuario, this);
@@ -326,12 +335,12 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void limpiarErrores(){
-        eUser.setVisibility(View.GONE);
-        ePass.setVisibility(View.GONE);
-        eConfPass.setVisibility(View.GONE);
-        eNombreApe.setVisibility(View.GONE);
-        eTel.setVisibility(View.GONE);
-        eEmail.setVisibility(View.GONE);
+        eUser.setVisibility(View.INVISIBLE); //GONE
+        ePass.setVisibility(View.INVISIBLE);
+        eConfPass.setVisibility(View.INVISIBLE);
+        eNombreApe.setVisibility(View.INVISIBLE);
+        eTel.setVisibility(View.INVISIBLE);
+        eEmail.setVisibility(View.INVISIBLE);
 
     }
 

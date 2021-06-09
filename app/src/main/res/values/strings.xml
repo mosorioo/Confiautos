@@ -54,8 +54,8 @@
     <string name="modificar">Modificar</string>
     <string name="eliminar">Eliminar</string>
     <string name="error">error</string>
-    <string name="leyendaUsuario">(*) Usuario: mínimo 6 letras</string>
-    <string name="leyendaPass">(*) Contraseña: mínimo 6 números</string>
+    <string name="leyendaUsuario">(*) Usuario: 6 letras</string>
+    <string name="leyendaPass">(*) Contraseña: 6 números</string>
     <string name="leyendaConfPass"> (*)Confirmar contraseña</string>
     <string name="leyendaTlf">(*) Telefono: Mínimo 10 números</string>
     <string name="marca">Marca</string>
@@ -71,8 +71,8 @@
     <string name="agregarAuto">Cargar los datos del Auto</string>
     <string name="agregarFotoAuto">Agregue una foto del auto</string>
     <string name="todoo">TODO</string>
-    <string name="errorUsuario">El usuario debe tener al menos 6 letras.</string>
-    <string name="errorPass">La contraseña debe tener al menos 6 números.</string>
+    <string name="errorUsuario">El usuario debe tener 6 letras.</string>
+    <string name="errorPass">La contraseña debe tener 6 números.</string>
     <string name="errorConfPass">La contraseñas ingresadas deben coincidir.</string>
     <string name="errorNombreApe">Debe ingresar su nombre y Apellido, solo letras.</string>
     <string name="errorTelefono">El telefono debe contener al menos 10 números.</string>
