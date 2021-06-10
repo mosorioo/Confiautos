@@ -98,6 +98,8 @@ import com.hola.confiautos.utilidades.Utilidades;
             c.moveToFirst();
             campoUsuario.setText(c.getString(0));
             //agregar algo para habilitar los textbox de pass y confpass
+            campoPass.setEnabled(true);//habilito para que no lo vuelva a poner
+            campoConfPass.setEnabled(true);
             c.close();
         }catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El Email no existe", Toast.LENGTH_LONG).show();

@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
+import com.hola.confiautos.utilidades.Utilidades;
 
 import java.util.regex.Pattern;
 
@@ -63,20 +64,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                             Snackbar.LENGTH_LONG)
                             .setDuration(2000)
                             .show();
-                    //limpiarErrores();
-                    //limpiarTodo();
                 }
             }
         });
-
-        /*
-        btnReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                registrarUsuario();
-            }
-        });*/
 
         btnVolv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +75,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                 volver();
             }
         });
-
-
     }
 
     private void volver() {
@@ -96,43 +84,16 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         finish();
     }
 
-   /* public void validarCampoEmail () {
-        String email = email.getText().toString().trim();
-
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            email.setError("Correo inválido");
-            return;
-        }
-    }*/
-   private boolean validarUsuario(String user) {
-       String tablaUsuario;
-
-       if (user.length() == 6) {
-           ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-           SQLiteDatabase db = conn.getReadableDatabase();
-
-           Cursor cur= db.rawQuery("SELECT * FROM " + TABLA_USUARIO +"", null);
-           int count = 0;
-           while (cur.moveToNext()) {
-               tablaUsuario= cur.getString(1);
-               if (us.equals(tablaUsuario)) {
-                   count++;
-               }
-           }
-           if (count > 0) {
-               //eUser.setText("Usuario existente");
-               //eUser.setVisibility(View.VISIBLE);
-               Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
-               return false;
-           } else {
-               return true;
-           }
-       }else {
+    /*
+   private boolean validarUsuario(String user){
+       Pattern pattern = Pattern.compile("[a-zA]");
+       //Pattern pattern = Pattern.compile("[a-zA-Z]");
+       if (!user.matches(String.valueOf(pattern))) {
            eUser.setVisibility(View.VISIBLE);
-           //Toast.makeText(this, "El usuario debe tener 6 letras", Toast.LENGTH_LONG).show();
-           return false;
+           //Toast.makeText(this, "El nombre y apellido debe contener solo letras", Toast.LENGTH_LONG).show();
        }
-   }
+       return user.matches(String.valueOf(pattern));
+   }*/
 
     private boolean validarPass(String pass) {//Validación de la pass: igual a 8 numeros
         Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=\\S+$).{6}$");
@@ -180,15 +141,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String campoTel = tel.getText().toString();
         String campoEmail = email.getText().toString();
 
-        //validarCamposVacios();
-
         validarTodos();
 
-        if (validarUsuario(usuario)) {
+       // if (!usuario.equals("") && validarUsuario(usuario)) {
+        if (!usuario.equals("") && usuario.length() == 8){
             if (!pass.equals("") && validarPass(pass)) {
                 if (!confirmarPass.equals("") && validarConfPass(confirmarPass) && !confirmarPass.equals(pas)) {
                     if (!nombreApe.equals("") && validarNombreApe(nombreApe)) {
-                     //   if (!apellido.equals("") && validarApellido(apellido)) {
                             if (!campoTel.equals("") && campoTel.length() >= 10) {
                                 if (!campoEmail.equals("") && validarEmail(campoEmail)) {
                                 } else {
@@ -202,9 +161,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                                 //Toast.makeText(this, "El telefono celular debe contener al menos 10 numeros", Toast.LENGTH_LONG).show();
                                 return false; //telefono
                             }
-                      /*  } else {
-                            return false; //apellido
-                        }*/
                     } else {
                         return false; //nombreApellido
                     }
@@ -215,42 +171,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                 return false; //pass
             }
         } else {
-            //eUser.setVisibility(View.VISIBLE);
+            eUser.setVisibility(View.VISIBLE);
             return false; //usuario
         }
         return true; //return de la función ValidarDatos
     }
 
     /*
-    private void registrarUsuario() {
-        Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()); //ape.getText().toString(),
-        Integer existe = dao.validarUsuario(usuario, this);
-        //Integer existe = 0;
-        dao.buscarUsuarios(Registro.this);
-        if (existe > 0) {
-            Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
-            limpiarTodo();
-        } else if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString())) { //ape.getText().toString(),
-            Toast.makeText(this, "ERROR: Campos Vacios", Toast.LENGTH_LONG).show();
-            limpiarTodo();
-        }
-        else {
-            dao.createUsuario(usuario, this);
-            Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
-            limpiarTodo();
-            Intent i = new Intent(Registro.this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-    }*/
-
     public void validarCamposVacios() {
         if (!dao.isNull(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()) && confpas.equals("")) { //ape.getText().toString(),
             Toast.makeText(this, "ERROR: Todos los campos se deben completar", Toast.LENGTH_LONG).show();
             limpiarTodo();
         }
-    }
-
+    }*/
 
     public void validarTodos(){
         String usu = us.getText().toString();
@@ -260,7 +193,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String tele = tel.getText().toString();
         String mail = email.getText().toString();
 
-        //aca consultamos con todos los campos no esten vacios
+        //Valido que todos los campos no esten vacios
         if (usu.equals("")){
             eUser.setText("El Usuario no puede estar vacío");
             eUser.setVisibility(View.VISIBLE);
@@ -288,16 +221,43 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private void ocultarValidaciones (){
-        eUser.setVisibility(View.INVISIBLE);
-        ePass.setVisibility(View.INVISIBLE);
-        eConfPass.setVisibility(View.INVISIBLE);
-        eNombreApe.setVisibility(View.INVISIBLE);
-        eTel.setVisibility(View.INVISIBLE);
-        eEmail.setVisibility(View.INVISIBLE);
+    private void registrarUsuario() {
+        Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()); //ape.getText().toString(),
+        Integer existe = dao.validarUsuario(usuario, this);
+        //Integer existe = 0;
+        dao.buscarUsuarios(Registro.this);
+        if (existe > 0) {
+            Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
+            limpiarTodo();
+        }
+        else {
+            dao.createUsuario(usuario, this);
+            Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
+            limpiarTodo();
+            Intent i = new Intent(Registro.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
-    private void registrarUsuario() {
+    //este no se esta usandos
+    private void registrarUsuario1() {
+        String tablaUsuario;
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        Cursor cur= db.rawQuery("SELECT * FROM " + TABLA_USUARIO +"", null);
+        int count = 0;
+        while (cur.moveToNext()) {
+            tablaUsuario= cur.getString(1);
+            if (us.equals(tablaUsuario)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            Toast.makeText(this, "El usuario ingresado ya existe", Toast.LENGTH_LONG).show();
+        } else {
         Usuario usuario = new Usuario(us.getText().toString(), pas.getText().toString(), nom.getText().toString(), tel.getText().toString(), email.getText().toString()); //ape.getText().toString(),
         dao.createUsuario(usuario, this);
         Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
@@ -305,28 +265,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         Intent i = new Intent(Registro.this, MainActivity.class);
         startActivity(i);
         finish();
-
-        /*
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-        SQLiteDatabase db = conn.getReadableDatabase();
-        ContentValues val = new ContentValues();
-        val.put("usuario", us.getText().toString().toLowerCase());
-        val.put("contrasena", pas.getText().toString());
-        val.put("nombreApe", nom.getText().toString());
-        val.put("telefono", tel.getText().toString());
-        val.put("email", email.getText().toString());
-
-        Long idresultante = db.insert("usuarios", "id", val);//me tiene que devolver el id de la bd
-        if (idresultante>0){//si no lo llegó a guardar
-            btnReg.setEnabled(false);//deshabilito para que no lo vuelva a poner
         }
-        else{
-            btnReg.setEnabled(true);
-        }
-        limpiarTodo();
-        Intent i = new Intent(Registro.this, MainActivity.class);
-        startActivity(i);
-        finish();*/
     }
 
     @Override

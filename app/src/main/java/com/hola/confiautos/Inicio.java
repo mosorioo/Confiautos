@@ -45,7 +45,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         Intent i = new Intent(Inicio.this, Nosotros.class);
         i.putExtra("Id", user.getId());
         startActivity(i);
-        finish();
     }
 
     //Metodo para el boton MisAutos
@@ -53,7 +52,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         Intent i1 = new Intent(Inicio.this, MisAutos.class);
         i1.putExtra("Id", user.getId());
         startActivity(i1);
-        finish();
     }
 
     //Metodo para el boton MiPerfil
@@ -61,7 +59,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         Intent i3 = new Intent(Inicio.this, MiPerfil.class);
         i3.putExtra("Id", user.getId());
         startActivity(i3);
-        finish();
     }
 
     //Metodo para el boton Salir
