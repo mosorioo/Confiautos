@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.VoiceInteractor;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,9 +40,10 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
 
     EditText campoMarca, campoModelo, campoAnio, campoNroMotor, campoNroChasis;
     Button btnGuardar, btnCancelar, btnCargarFoto, btnTomarFoto;
-    TextView errorDatos;
+    TextView errorDatos, texIdUsuario;
     ImageView fotoAuto;
 
+    //para la imagen
     private Uri imagenUri; //Formato para almacenar fotos.
     int imagen;
     private Bitmap imgToStorage; //Otro Formato para almacenar fotos.
@@ -51,9 +53,11 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CAMARA = 102;
     private static final int REQUEST_IMAGE_CAMARA = 103;
 
+
+
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
-    Integer idUser = 0;
+    Integer idUser = 0; //este creo q no va
     Intent x;
 
     DaoAuto daoAuto = new DaoAuto();
@@ -80,6 +84,9 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), AgregarAuto.this);
         Bundle bundle = getIntent().getExtras();
         idUser = bundle.getInt("id");
+
+        texIdUsuario = findViewById(R.id.idUsuario);
+        texIdUsuario.setText(user.getId().toString());
 
         /*Para modificar auto
         marca.setText(car.getMarca());
@@ -202,9 +209,12 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     //youtube
     //para la galeria FUNCIONA
     private void abrirGaleria (){
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.setType("image/*");
-        startActivityForResult(i, REQUEST_IMAGE_GALLERY);
+       // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent i1 = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //i.setType("image/*");
+        i1.setType("image/");
+       // startActivityForResult(i, REQUEST_IMAGE_GALLERY);
+        startActivityForResult(i1,REQUEST_IMAGE_GALLERY);
     }
 
     private boolean validarCamposVacios(){
@@ -278,6 +288,8 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     }
 
     private void guardarAuto(){
+       // Auto auto = new Auto(user.getId().toString(), campoMarca.getText().toString(), campoModelo.getText().toString(),campoAnio.getText().toString(), campoNroMotor.getText().toString(), campoNroChasis.getText().toString());
+      //  Colecciones coleccion = new Colecciones(tituloColeccion.getText().toString(),descripcionColeccion.getText().toString(),u.getId().toString(),RUTA_IMAGEN);
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
         SQLiteDatabase db = conn.getWritableDatabase();
         ContentValues values = new ContentValues();

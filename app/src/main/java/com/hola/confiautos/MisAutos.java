@@ -2,6 +2,7 @@ package com.hola.confiautos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
 import com.hola.confiautos.entidades.AutoAdaptador;
 import com.hola.confiautos.entidades.Usuario;
+import com.hola.confiautos.services.DaoAuto;
 import com.hola.confiautos.services.DaoUsuario;
 import com.hola.confiautos.utilidades.Utilidades;
 
@@ -24,6 +27,7 @@ import java.util.List;
 public class MisAutos extends AppCompatActivity implements View.OnClickListener {
 
     Button btnVolv, btnAgregar, btnModificar, btnEliminar;
+    TextView texIdUsuario;
     private View v;
 
     DaoUsuario dao = new DaoUsuario();
@@ -31,34 +35,43 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
     Integer id = 0; //para recuperar el id de usuario
     Intent x;
 
+    //auto
+    //DaoAuto daoAuto = new DaoAuto();
+    Auto auto = new Auto();
+
+
     ListView mListView;
     List<Auto> mListAutos;
     ListAdapter mAdapter;
-    ConexionSQLiteHelper conxDB;
+    ConexionSQLiteHelper conn; //conn
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_autos);
 
-        conxDB=new ConexionSQLiteHelper(this,null,1);
+        conn=new ConexionSQLiteHelper(this,null,1);
         mListView=findViewById(R.id.listAutos);
 
-       // llenarBasePrueba();
-        consultarBase();
+        llenarBasePrueba();
+        consultarAutos();
 
         mAdapter=new AutoAdaptador(this,R.layout.card_view_auto,mListAutos);
         mListView.setAdapter(mAdapter);
 
         btnAgregar = findViewById(R.id.btnAgregarAuto);
-        btnModificar = findViewById(R.id.btnModificarAuto);
+       // btnModificar = findViewById(R.id.btnModificarAuto);
         btnEliminar = findViewById(R.id.btnEliminarAuto);
         btnVolv = findViewById(R.id.btnMisAutosVolver);
         //dao=new daoUsuario(this);
 
+        texIdUsuario = findViewById(R.id.idUsuarioAuto);
+
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MisAutos.this);
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
+
+        texIdUsuario.setText(user.getId().toString());
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +100,10 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
     }
 
     //Solo para la prueba rapida
-    /*
+
     private void llenarBasePrueba() {
 
-        SQLiteDatabase db=conxDB.getWritableDatabase();
+        SQLiteDatabase db=conn.getWritableDatabase();
 
         for(int i=0;i<3;i++){
             ContentValues values=new ContentValues();
@@ -103,35 +116,37 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
             Long idresultante=db.insert(Utilidades.TABLA_MIS_AUTOS,Utilidades.ID_AUTO,values);
         }
 
-    }*/
+    }
 
-    private void consultarBase() {
+    private void consultarAutos() {
 
-        SQLiteDatabase db=conxDB.getReadableDatabase();
+        SQLiteDatabase db=conn.getReadableDatabase();
         Auto autoObj=null;
-        mListAutos=new ArrayList<Auto>();
+        mListAutos= new ArrayList<Auto>();
 
         Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
+
+    //    Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id DESC;",null);
 
         while(cursor.moveToNext()){
             autoObj=new Auto();
             autoObj.setId(cursor.getInt(0));
-            autoObj.setMarca(cursor.getString(1));
-            autoObj.setModelo(cursor.getString(2));
-            autoObj.setAnio(cursor.getInt(3));
-            autoObj.setNroMotor(cursor.getString(4));
-            autoObj.setNroChasis(cursor.getString(5));
+            autoObj.setMarca(cursor.getString(2));
+            autoObj.setModelo(cursor.getString(3));
+            autoObj.setAnio(cursor.getInt(4));
+            autoObj.setNroMotor(cursor.getString(5));
+            autoObj.setNroChasis(cursor.getString(6));
 
-            /*// Forma Antigua de publicar la foto
-            if (cursor.getString(6)!=null){
-                autoObj.setFotoAuto(cursor.getString(3));
+            // Forma Antigua de publicar la foto
+            if (cursor.getString(7)!=null){
+                autoObj.setFotoAuto(cursor.getString(7));
             }else{
                 autoObj.setFotoAuto(null);
-            }*/
-            autoObj.setFotoAuto(null);
+            }
+            autoObj.setIdUsuario(cursor.getInt(1));
 
+            //autoObj.setFotoAuto(null);
             mListAutos.add(autoObj);
-
         }
     }
 }

@@ -2,14 +2,14 @@ package com.hola.confiautos.entidades;
 
 public class Auto {
 
-    private Integer id;
-    private Integer idUsuario;
-    private String marca;
-    private String modelo;
-    private Integer anio;
-    private String nroMotor;
-    private String nroChasis;
-    private String fotoAuto;
+    private Integer id; //0
+    private Integer idUsuario; //1
+    private String marca; //2
+    private String modelo; //3
+    private Integer anio; //4
+    private String nroMotor; //5
+    private String nroChasis; //6
+    private String fotoAuto; //7
 
     //Constructor
     public Auto(Integer id, Integer idUsuario, String marca, String modelo, Integer año, String nroMotor, String nroChasis, String fotoAuto) {
