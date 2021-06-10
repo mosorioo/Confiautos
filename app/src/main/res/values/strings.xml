@@ -73,7 +73,7 @@
     <string name="todoo">TODO</string>
     <string name="errorUsuario">El usuario debe tener 8 dígitos.</string>
     <string name="errorPass">La contraseña debe tener 6 números.</string>
-    <string name="errorConfPass">La contraseñas ingresadas deben coincidir.</string>
+    <string name="errorConfPass">Las contraseñas ingresadas deben coincidir.</string>
     <string name="errorNombreApe">Debe ingresar su nombre y Apellido, solo letras.</string>
     <string name="errorTelefono">El telefono debe contener al menos 10 números.</string>
     <string name="errorEmail">El e-mail ingresado no cumple con el formato de e-mail.</string>

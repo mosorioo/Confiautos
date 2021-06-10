@@ -56,6 +56,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resetErrores();
                 limpiarErrores();
                 if (validarDatos()) {
                     registrarUsuario();
@@ -281,6 +282,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         eTel.setVisibility(View.INVISIBLE);
         eEmail.setVisibility(View.INVISIBLE);
 
+    }
+
+    public void resetErrores() {
+        eUser.setText("El usuario debe tener 8 dígitos.");
+        ePass.setText("La contraseña debe tener 6 números.");
+        eConfPass.setText("Las contraseñas ingresadas deben coincidir.");
+        eNombreApe.setText("Debe ingresar su nombre y Apellido, solo letras.");
+        eTel.setText("El telefono debe contener al menos 10 números.");
+        eEmail.setText("El e-mail ingresado no cumple con el formato de e-mail.");
     }
 
     private void limpiarTodo() {
