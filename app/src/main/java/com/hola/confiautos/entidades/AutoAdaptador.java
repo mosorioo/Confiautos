@@ -50,7 +50,7 @@ public class AutoAdaptador extends ArrayAdapter<Auto> {
 
         marca.setText(autoObjeto.getMarca());
         modelo.setText(autoObjeto.getModelo());
-        anio.setText(autoObjeto.getAnio().toString());
+        anio.setText(autoObjeto.getAnio());
         nroChasis.setText(autoObjeto.getMarca());
         nroMotor.setText(autoObjeto.getNroMotor());
 

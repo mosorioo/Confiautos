@@ -36,7 +36,7 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
     Intent x;
 
     //auto
-    //DaoAuto daoAuto = new DaoAuto();
+    DaoAuto daoAuto = new DaoAuto();
     Auto auto = new Auto();
 
 
@@ -53,7 +53,11 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         conn=new ConexionSQLiteHelper(this,null,1);
         mListView=findViewById(R.id.listAutos);
 
-        llenarBasePrueba();
+        user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MisAutos.this);
+        Bundle bundle = getIntent().getExtras();
+        id = bundle.getInt("id");
+
+      //  llenarBasePrueba();
         consultarAutos();
 
         mAdapter=new AutoAdaptador(this,R.layout.card_view_auto,mListAutos);
@@ -66,11 +70,6 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         //dao=new daoUsuario(this);
 
         texIdUsuario = findViewById(R.id.idUsuarioAuto);
-
-        user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), MisAutos.this);
-        Bundle bundle = getIntent().getExtras();
-        id = bundle.getInt("id");
-
         texIdUsuario.setText(user.getId().toString());
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -124,16 +123,17 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         Auto autoObj=null;
         mListAutos= new ArrayList<Auto>();
 
-        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
+        Cursor cursor1=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
 
-    //    Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id DESC;",null);
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id DESC;",null);
 
         while(cursor.moveToNext()){
             autoObj=new Auto();
             autoObj.setId(cursor.getInt(0));
+            autoObj.setIdUsuario(cursor.getInt(1));
             autoObj.setMarca(cursor.getString(2));
             autoObj.setModelo(cursor.getString(3));
-            autoObj.setAnio(cursor.getInt(4));
+            autoObj.setAnio(cursor.getString(4));
             autoObj.setNroMotor(cursor.getString(5));
             autoObj.setNroChasis(cursor.getString(6));
 
@@ -143,7 +143,6 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
             }else{
                 autoObj.setFotoAuto(null);
             }
-            autoObj.setIdUsuario(cursor.getInt(1));
 
             //autoObj.setFotoAuto(null);
             mListAutos.add(autoObj);

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,8 +12,10 @@ import android.app.VoiceInteractor;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
 import com.hola.confiautos.entidades.Usuario;
@@ -40,7 +44,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
 
     EditText campoMarca, campoModelo, campoAnio, campoNroMotor, campoNroChasis;
     Button btnGuardar, btnCancelar, btnCargarFoto, btnTomarFoto;
-    TextView errorDatos, texIdUsuario;
+    TextView errorDatos, texIdUsuario; //Borrar el textIdUsuario
     ImageView fotoAuto;
 
     //para la imagen
@@ -53,7 +57,18 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CAMARA = 102;
     private static final int REQUEST_IMAGE_CAMARA = 103;
 
+    private int PICK_IMAGE_REQUEST = 200;
+    private Uri imgFilePath;
+ //   private Bitmap imgToStorage;
+    String pathImagen;
+   // private Uri imagenUri;
 
+    Boolean useCam=false;
+    Boolean useGallery=false;
+
+    //variables tomar foto
+    String RUTA_IMAGEN;
+    int TOMAR_FOTO=100;
 
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
@@ -69,6 +84,13 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_auto);
 
+        user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), AgregarAuto.this);
+        Bundle bundle = getIntent().getExtras();
+        idUser = bundle.getInt("id");
+
+        useCam=false;
+        useGallery=false;
+
         campoMarca = findViewById(R.id.regMarca);
         campoModelo = findViewById(R.id.regModelo);
         campoAnio = findViewById(R.id.regAnio);
@@ -81,20 +103,8 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnRegAutoGuardar);
         btnCancelar = findViewById(R.id.btnRegAutoCancelar);
 
-        user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), AgregarAuto.this);
-        Bundle bundle = getIntent().getExtras();
-        idUser = bundle.getInt("id");
-
         texIdUsuario = findViewById(R.id.idUsuario);
         texIdUsuario.setText(user.getId().toString());
-
-        /*Para modificar auto
-        marca.setText(car.getMarca());
-        modelo.setText(car.getModelo());
-        anio.setText(car.getAnio());
-        nroMotor.setText(car.getNroMotor());
-        nroChasis.setText(car.getNroChasis());
-        fotoAuto.setText() */
 
         //youtube
         //para la galeria FUNCIONA
@@ -114,6 +124,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                     abrirGaleria();
                 }
             }
+
         });
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +134,12 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                         //Tomar foto;
-                        goToCamara();
+                        abrirCamara();
                     }else{
                         ActivityCompat.requestPermissions(AgregarAuto.this, new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CODE);
                     }
                 }else{
-                    goToCamara();
+                    abrirCamara();
                 }
             }
 
@@ -137,11 +148,11 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCamposVacios()){
+             //   if (validarCamposVacios()){
                     guardarAuto();
-                } else {
+            /*    } else {
                     errorDatos.setVisibility(View.VISIBLE);
-                    errorDatos.setText(error); }
+                    errorDatos.setText(error); } */
             }
         });
 
@@ -157,65 +168,93 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
 
     }
 
-    //youtube
-    //para la galeria FUNCIONA
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE_GALLERY){
-            if(resultCode== Activity.RESULT_OK && data != null){
-                Uri foto = data.getData();
-                fotoAuto.setImageURI(foto);
-            }else{
-                Log.i("TAG", "Result: "+resultCode);
-                Toast.makeText(this, "No se seleccionó ninguna foto", Toast.LENGTH_SHORT).show();
-            }
-        }
-        //aqui hago el de camara
-        else if(requestCode == REQUEST_IMAGE_CAMARA){
-            if(resultCode== Activity.RESULT_OK && data != null){
-                //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                //fotoAuto.setImageBitmap(bitmap);
-                Uri foto = data.getData();
-                fotoAuto.setImageURI(foto);
-                Log.i("TAG", "Result=> "+ foto);
-            }else{
-                Log.i("TAG", "Result: "+ resultCode);
-                Toast.makeText(this, "No tomó ninguna foto", Toast.LENGTH_SHORT).show();
-            }
-        }
+    private void abrirGaleria() {
+
+        useGallery=true;
+        useCam=false;
+        Intent i= new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        i.setType("image/");
+        startActivityForResult(i,PICK_IMAGE_REQUEST);
     }
 
-    //youtube
-    //para la galeria FUNCIONA
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        if(requestCode==REQUEST_PERMISSION_CODE){
-            if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                abrirGaleria();
-            }else{
-                Toast.makeText(this, "Debe habilitar los permisos", Toast.LENGTH_SHORT).show();
+
+    public void abrirCamara () {
+            useCam = true;
+            useGallery = false;
+
+            Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File imagenArchivo = null;
+            try {
+                imagenArchivo = crearImagen();
+            } catch (IOException ex) {
+                Log.e("Error", ex.toString());
+
+                if (imagenArchivo != null) {
+                    imagenUri = FileProvider.getUriForFile(this, "com.example.mycollection.fileprovider", imagenArchivo);
+
+                    i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
+                    startActivityForResult(i, TOMAR_FOTO);
+                }
             }
-        }//aqui hago el de la camara
-        else if(requestCode == REQUEST_PERMISSION_CAMARA) {
-            if(permissions.length > 0 &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                goToCamara();
-            }else{
-                Toast.makeText(this, "Debe habilitar los permisos", Toast.LENGTH_SHORT).show();
-            }
-        }
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    //youtube
-    //para la galeria FUNCIONA
-    private void abrirGaleria (){
-       // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        Intent i1 = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //i.setType("image/*");
-        i1.setType("image/");
-       // startActivityForResult(i, REQUEST_IMAGE_GALLERY);
-        startActivityForResult(i1,REQUEST_IMAGE_GALLERY);
-    }
+        private File crearImagen () throws IOException {
+            String nombreImagen = "Foto_";
+            File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);
+            RUTA_IMAGEN = imagen.getAbsolutePath();
+            return imagen;
+        }
+
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+            super.onActivityResult(requestCode, resultCode, data);
+
+            if (useGallery) {
+                if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null &&
+                        data.getData() != null) {
+                    imgFilePath = data.getData();
+                    RUTA_IMAGEN = getRealPathFromURI(imgFilePath).toLowerCase();
+                    fotoAuto.setImageURI(imgFilePath);
+                }
+            }
+            if (useCam) {
+                if (resultCode == RESULT_OK && data != null) {
+                    File imagenfile = new File(RUTA_IMAGEN);
+                    imgFilePath = data.getData();
+
+                    if (imagenfile.exists()) {
+                        imgToStorage = BitmapFactory.decodeFile(imagenfile.getAbsolutePath());
+
+                        fotoAuto.setImageBitmap(imgToStorage);
+                    }
+                }
+            }
+
+        }
+        public String getRealPathFromURI (Uri uri){
+            String[] projection = {MediaStore.Images.Media.DATA};
+            @SuppressWarnings("deprecation") Cursor cursor = managedQuery(uri, projection, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+
+        private void guardarAuto () {
+
+            Auto auto = new Auto(user.getId().toString(), campoMarca.getText().toString(), campoModelo.getText().toString(), campoAnio.getText().toString(), campoNroMotor.getText().toString(), campoNroChasis.getText().toString(), RUTA_IMAGEN);
+
+            daoAuto.createAuto(auto, this);
+            imgToStorage = null;
+            RUTA_IMAGEN = null;
+            useGallery = false;
+            useCam = false;
+            Toast.makeText(this, "Auto agregado", Toast.LENGTH_LONG).show();
+            Intent intento = new Intent(getApplicationContext(), MisAutos.class);
+            intento.putExtra("Id", user.getId());
+            startActivity(intento);
+            onBackPressed();
+        }
 
     private boolean validarCamposVacios(){
         //FOTO?
@@ -243,94 +282,4 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             return false;
         }
     }
-
-    /*
-    private void cargarFotoGaleria(){
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        i.setType("imagen/");
-        imagen =10;
-        startActivityForResult(Intent.createChooser(i, "Selecciona imagen ;)"), imagen);
-
-    } */
-
-    //youtube
-    //para la camara
-    private void goToCamara(){
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(i.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(i, REQUEST_IMAGE_CAMARA);
-        }
-    }
-
-    /*
-    public void abrirCamara() {
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File imagenArchivo = null;
-        try {
-            imagenArchivo = CrearImagen();// intento asignar los datos de la foto(nombre y donde se guarda)
-        } catch (IOException ex) {
-            Log.e("Error", ex.toString());// si no se genero el archivo por un error lo informa
-        }
-        if (imagenArchivo != null) {//si tiene foto sacada, la guarda
-            imagenUri = FileProvider.getUriForFile(this, "com.example.hola.confiautos.fileprovider", imagenArchivo); //faltaaaaaaaa
-            imagen =100;//numero que se asigna para la camara
-            i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);//guarda la imagen y va a la linea siguiente
-            startActivityForResult(i, imagen);
-        }
-    }*/
-
-    private File CrearImagen() throws IOException {
-        String nombreImagen = "Foto_";
-        File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);// crea o guarda en la carpeta la foto
-        File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);//concatena el nombre de la foto, donde se guarda y el formato
-        direccionUriImg = imagen.getAbsolutePath();//asignamos a la variable la direccion adonde esta la foto guardada
-        return imagen;
-    }
-
-    private void guardarAuto(){
-       // Auto auto = new Auto(user.getId().toString(), campoMarca.getText().toString(), campoModelo.getText().toString(),campoAnio.getText().toString(), campoNroMotor.getText().toString(), campoNroChasis.getText().toString());
-      //  Colecciones coleccion = new Colecciones(tituloColeccion.getText().toString(),descripcionColeccion.getText().toString(),u.getId().toString(),RUTA_IMAGEN);
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-        SQLiteDatabase db = conn.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Utilidades.ID_USUARIO, idUser); //no se si es asi == idUser
-        values.put(Utilidades.MARCA,campoMarca.getText().toString());
-        values.put(Utilidades.MODELO,campoModelo.getText().toString());
-        values.put(Utilidades.ANIO,campoAnio.getText().toString());
-        values.put(Utilidades.NRO_MOTOR,campoNroMotor.getText().toString());
-        values.put(Utilidades.NRO_CHASIS,campoNroChasis.getText().toString());
-        values.put(Utilidades.FOTO_AUTO,direccionUriImg);
-
-        Long idresultante = db.insert("Auto", "id", values);
-        if (idresultante>0){//si no lo llegó a guardar
-            btnGuardar.setEnabled(false);//deshabilito para que no lo vuelva a poner
-        }
-        else{
-            btnGuardar.setEnabled(true);
-        }
-       /* Utilidades.perroLog = (Integer)idresultante.intValue();
-        System.out.println("el valor de idresultante es:" + Utilidades.perroLog);*/
-        Toast.makeText(this, "Auto agregado" + idresultante, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(AgregarAuto.this, MisAutos.class);
-        i.putExtra("Id", user.getId());
-        startActivity(i);
-        finish();
-
-    }
-
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && imagen ==10) { //cuando uso la galeria vale 10, cuando es camara vale 100
-            Uri path = data.getData();
-            direccionUriImg = path.toString();
-            fotoAuto.setImageURI(path);
-            Toast.makeText(this, "Se agregó la foto :" + path, Toast.LENGTH_LONG).show();
-        }else if (resultCode == RESULT_OK && imagen ==100){
-            File imagenfile=new File(direccionUriImg);
-            imgToStorage= BitmapFactory.decodeFile(imagenfile.getAbsolutePath());
-            fotoAuto.setImageBitmap(imgToStorage);
-        }
-    }*/
 }

@@ -6,13 +6,13 @@ public class Auto {
     private Integer idUsuario; //1
     private String marca; //2
     private String modelo; //3
-    private Integer anio; //4
+    private String anio; //4
     private String nroMotor; //5
     private String nroChasis; //6
     private String fotoAuto; //7
 
     //Constructor
-    public Auto(Integer id, Integer idUsuario, String marca, String modelo, Integer año, String nroMotor, String nroChasis, String fotoAuto) {
+    public Auto(Integer id, Integer idUsuario, String marca, String modelo, String año, String nroMotor, String nroChasis, String fotoAuto) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.marca = marca;
@@ -23,11 +23,14 @@ public class Auto {
         this.fotoAuto = fotoAuto;
     }
 
-    public Auto(String marca, String modelo, Integer año, String nroMotor, String nroChasis, String fotoAuto) {
+    public Auto(String marca, String modelo, String año, String nroMotor, String nroChasis, String fotoAuto) {
         this(null, null, marca, modelo, año, nroMotor, nroChasis, fotoAuto);
     }
 
     public Auto() {
+    }
+
+    public Auto(String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String ruta_imagen) {
     }
 
     //Getters y Setters
@@ -63,11 +66,11 @@ public class Auto {
         this.modelo = modelo;
     }
 
-    public Integer getAnio() {
+    public String getAnio() {
         return anio;
     }
 
-    public void setAnio(Integer anio) {
+    public void setAnio(String anio) {
         this.anio = anio;
     }
 
