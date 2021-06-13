@@ -130,7 +130,9 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                abrirCamara();
+            }
+/*
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                         //Tomar foto;
@@ -141,7 +143,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 }else{
                     abrirCamara();
                 }
-            }
+            }*/
 
         });
 
@@ -187,15 +189,14 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             try {
                 imagenArchivo = crearImagen();
             } catch (IOException ex) {
-                Log.e("Error", ex.toString());
+                Log.e("Error", ex.toString());}
 
                 if (imagenArchivo != null) {
-                    imagenUri = FileProvider.getUriForFile(this, "com.example.mycollection.fileprovider", imagenArchivo);
+                    imagenUri = FileProvider.getUriForFile(this, "com.hola.confiautos.fileprovider", imagenArchivo);
 
                     i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
                     startActivityForResult(i, TOMAR_FOTO);
                 }
-            }
     }
 
         private File crearImagen () throws IOException {

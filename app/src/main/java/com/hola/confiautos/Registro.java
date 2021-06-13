@@ -155,12 +155,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                                     return false; //email
                                 }
                             } else {
-                                //  error = "El telefono celular debe contener al menos 10 numeros";
-                               /* errorDatos.setText("El telefono celular debe contener al menos 10 numeros");
-                                errorDatos.setVisibility(View.VISIBLE); */
-                                eTel.setVisibility(View.VISIBLE);
-                                //Toast.makeText(this, "El telefono celular debe contener al menos 10 numeros", Toast.LENGTH_LONG).show();
-                                return false; //telefono
+                               eTel.setVisibility(View.VISIBLE);
+                               return false; //telefono
                             }
                     } else {
                         return false; //nombreApellido

@@ -26,6 +26,7 @@ public class AutoAdaptador extends ArrayAdapter<Auto> {
     public int resourseLayout;
     public ImageView imgPost;
     public CardView cardImagen;
+
     public AutoAdaptador(@NonNull Context context, int resource, @NonNull List<Auto> objects) {
         super(context, resource, objects);
         this.autoList=objects;

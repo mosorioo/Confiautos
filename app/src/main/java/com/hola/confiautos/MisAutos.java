@@ -120,24 +120,23 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
     private void consultarAutos() {
 
         SQLiteDatabase db=conn.getReadableDatabase();
-        Auto autoObj=null;
+        Auto autoObj= null;
         mListAutos= new ArrayList<Auto>();
 
-        Cursor cursor1=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
+     //   Cursor cursor1=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
 
         Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id DESC;",null);
 
         while(cursor.moveToNext()){
             autoObj=new Auto();
             autoObj.setId(cursor.getInt(0));
-            autoObj.setIdUsuario(cursor.getInt(1));
+            autoObj.setIdUsuario(cursor.getString(1));
             autoObj.setMarca(cursor.getString(2));
             autoObj.setModelo(cursor.getString(3));
             autoObj.setAnio(cursor.getString(4));
             autoObj.setNroMotor(cursor.getString(5));
             autoObj.setNroChasis(cursor.getString(6));
 
-            // Forma Antigua de publicar la foto
             if (cursor.getString(7)!=null){
                 autoObj.setFotoAuto(cursor.getString(7));
             }else{

@@ -3,7 +3,7 @@ package com.hola.confiautos.entidades;
 public class Auto {
 
     private Integer id; //0
-    private Integer idUsuario; //1
+    private String idUsuario; //1
     private String marca; //2
     private String modelo; //3
     private String anio; //4
@@ -12,8 +12,7 @@ public class Auto {
     private String fotoAuto; //7
 
     //Constructor
-    public Auto(Integer id, Integer idUsuario, String marca, String modelo, String año, String nroMotor, String nroChasis, String fotoAuto) {
-        this.id = id;
+    public Auto(String idUsuario, String marca, String modelo, String año, String nroMotor, String nroChasis, String fotoAuto) {
         this.idUsuario = idUsuario;
         this.marca = marca;
         this.modelo = modelo;
@@ -23,15 +22,11 @@ public class Auto {
         this.fotoAuto = fotoAuto;
     }
 
-    public Auto(String marca, String modelo, String año, String nroMotor, String nroChasis, String fotoAuto) {
-        this(null, null, marca, modelo, año, nroMotor, nroChasis, fotoAuto);
-    }
-
     public Auto() {
     }
 
-    public Auto(String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String ruta_imagen) {
-    }
+  /*  public Auto(String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String ruta_imagen) {
+    }*/
 
     //Getters y Setters
     public Integer getId() {
@@ -42,11 +37,11 @@ public class Auto {
         this.id = id;
     }
 
-    public Integer getIdUsuario() {
+    public String  getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
