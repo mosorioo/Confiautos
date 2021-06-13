@@ -25,11 +25,10 @@ import java.util.regex.Pattern;
 import static com.hola.confiautos.utilidades.Utilidades.TABLA_USUARIO;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
-    EditText us, pas, confpas, nom, tel, email; //ape,
+    EditText us, pas, confpas, nom, tel, email;
     Button btnReg, btnVolv;
     DaoUsuario dao = new DaoUsuario();
     TextView eUser, ePass, eConfPass, eNombreApe, eTel, eEmail;
-    String error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         pas = findViewById(R.id.regPassword);
         confpas = findViewById(R.id.regConfPassword);
         nom = findViewById(R.id.regNombre);
-      //  ape = findViewById(R.id.regApellido);
         tel = findViewById(R.id.regNroTelefono);
         email = findViewById(R.id.regEmail);
         btnReg = findViewById(R.id.btnRegRegistrar);
@@ -85,22 +83,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         finish();
     }
 
-    /*
-   private boolean validarUsuario(String user){
-       Pattern pattern = Pattern.compile("[a-zA]");
-       //Pattern pattern = Pattern.compile("[a-zA-Z]");
-       if (!user.matches(String.valueOf(pattern))) {
-           eUser.setVisibility(View.VISIBLE);
-           //Toast.makeText(this, "El nombre y apellido debe contener solo letras", Toast.LENGTH_LONG).show();
-       }
-       return user.matches(String.valueOf(pattern));
-   }*/
-
     private boolean validarPass(String pass) {//Validación de la pass: igual a 8 numeros
         Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=\\S+$).{6}$");
         if (!pass.matches(String.valueOf(pattern))) {
             ePass.setVisibility(View.VISIBLE);
-            //Toast.makeText(this, "La contraseña debe tener 6 caracteres númericos.", Toast.LENGTH_LONG).show();
         }
         return pass.matches(String.valueOf(pattern));
     }
@@ -109,17 +95,14 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=\\S+$).{6}$");
         if (!confiPass.matches(String.valueOf(pattern))) {
             eConfPass.setVisibility(View.VISIBLE);
-           // Toast.makeText(this, "La contraseñas ingresadas deben coincidir", Toast.LENGTH_LONG).show();
         }
         return confiPass.matches(String.valueOf(pattern));
     }
 
     private boolean validarNombreApe(String nombre) {//Validación del nombre: Solo letras
         Pattern pattern = Pattern.compile("[a-zA-Z-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-Z-ZñÑáéíóúÁÉÍÓÚ\\s]+");
-        //Pattern pattern = Pattern.compile("[a-zA-Z]");
         if (!nombre.matches(String.valueOf(pattern))) {
             eNombreApe.setVisibility(View.VISIBLE);
-            //Toast.makeText(this, "El nombre y apellido debe contener solo letras", Toast.LENGTH_LONG).show();
         }
         return nombre.matches(String.valueOf(pattern));
     }
@@ -237,7 +220,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    //este no se esta usandos
+    //este no lo uso
+    /*
     private void registrarUsuario1() {
         String tablaUsuario;
 
@@ -263,7 +247,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         startActivity(i);
         finish();
         }
-    }
+    } */
 
     @Override
     public void onClick(View v) {
@@ -299,75 +283,3 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         email.setText("");
     }
 }
-
-//fin 2do intento
-
-/*Codigo anterior
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import com.hola.confiautos.entidades.Usuario;
-import com.hola.confiautos.services.daoUsuario;
-
-public class Registro extends AppCompatActivity implements View.OnClickListener {
-    EditText us, pas, nom, ape, tel, email; // tdocu,
-    Button reg, volv;
-    daoUsuario dao;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
-        us=(EditText)findViewById(R.id.regUsuario);
-        pas=(EditText)findViewById(R.id.regPassword);
-      //  confpas=(EditText)findViewById(R.id.regConfiPassword);
-        nom=(EditText)findViewById(R.id.regNombre);
-        ape=(EditText)findViewById(R.id.regApellido);
-        tel=(EditText)findViewById(R.id.regNroTelefono);
-        email=(EditText)findViewById(R.id.regEmail);
-        reg=(Button)findViewById(R.id.btnRegRegistrar);
-        volv=(Button)findViewById(R.id.btnRegVolver);
-        reg.setOnClickListener(this);
-        volv.setOnClickListener(this);
-        dao=new daoUsuario(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnRegRegistrar:
-                Usuario u=new Usuario();
-
-                u.setUsuario(us.getText().toString());
-                u.setPassword(pas.getText().toString());
-               // u.setConfiPassword(confpas.getText().toString());
-                u.setNombre(nom.getText().toString());
-                u.setApellidos(ape.getText().toString());
-                u.setNroTelefono(tel.getText().toString());
-                u.setEmail(email.getText().toString()); //hasta aqui recupero los valores, ahora voy a validarlos
-                if (!u.isNull()){
-                    Toast.makeText(this,"ERROR: Campos Vacios", Toast.LENGTH_LONG).show();
-                }else if(dao.insertUsuario(u)){
-                    Toast.makeText(this, "¡Registro Exitoso!", Toast.LENGTH_LONG).show();
-                    Intent i2=new Intent(Registro.this,MainActivity.class); //Me lleva al Main Activity
-                    startActivity(i2);
-                    finish();
-                }else{
-                    Toast.makeText(this, "USUARIO YA REGISTRADO", Toast.LENGTH_LONG).show();
-
-                }
-
-                break;
-            case R.id.btnRegVolver:
-                Intent i=new Intent(Registro.this,MainActivity.class);
-                finish();
-                break;
-        }
-    }
-}*/
