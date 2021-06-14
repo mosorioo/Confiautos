@@ -125,7 +125,7 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
 
      //   Cursor cursor1=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS +" ORDER BY id DESC;",null);
 
-        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id DESC;",null);
+        Cursor cursor=db.rawQuery("SELECT * FROM "+ Utilidades.TABLA_MIS_AUTOS + " WHERE "+Utilidades.ID_USUARIO+ " =" +user.getId()+ " ORDER BY id ASC;",null);
 
         while(cursor.moveToNext()){
             autoObj=new Auto();

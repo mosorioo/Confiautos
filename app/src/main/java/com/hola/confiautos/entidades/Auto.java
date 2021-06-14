@@ -25,6 +25,10 @@ public class Auto {
     public Auto() {
     }
 
+    public Auto(Integer id) {
+        this.id = id;
+    }
+
   /*  public Auto(String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String ruta_imagen) {
     }*/
 

@@ -21,7 +21,6 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
 
     EditText us, pas, confPass, nom, tel, email;
     Button btnGuard, btnVolv;
-    TextView error;
     private View v;
     DaoUsuario dao = new DaoUsuario();
     Usuario user;
@@ -39,7 +38,6 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
         pas = findViewById(R.id.editPassword);
         confPass = findViewById(R.id.editConfPassword);
         nom = findViewById(R.id.editNombre);
-        //ape = findViewById(R.id.editApellido);
         tel = findViewById(R.id.editNroTelefono);
         email = findViewById(R.id.editEmail);
         btnGuard = findViewById(R.id.btnEditGuardar);
@@ -228,35 +226,6 @@ public class MiPerfil extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
 
     }
-
-  /*  //Metodo para cargar el formulario con los datos del usuario logueado
-    public void Buscar (View view){
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, null, 1);
-        SQLiteDatabase db = conn.getReadableDatabase();
-
-        String id = ;
-
-    }*/
-
- /*   //Metodo para el boton Volver, este regresa a Inicio
-    public void Volver(View view) {
-        Intent i = new Intent(MiPerfil.this, Inicio.class);
-        i.putExtra("Id", user.getId());
-        startActivity(i);
-        finish();
-    }
-
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnEditVolver:
-                Intent i = new Intent(MiPerfil.this, Inicio.class);
-                i.putExtra("Id", user.getId());
-                startActivity(i);
-                finish();
-                break;
-        }
-*/
 
 }
 

@@ -77,4 +77,14 @@
     <string name="errorNombreApe">Debe ingresar su nombre y Apellido, solo letras.</string>
     <string name="errorTelefono">El telefono debe contener al menos 10 números.</string>
     <string name="errorEmail">El e-mail ingresado no cumple con el formato de e-mail.</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="turno_nuevo">Turno Nuevo</string>
+    <string name="dia">Seleccione el día:</string>
+    <string name="Calendario">Calendario</string>
+    <string name="seleccione_la_hora">Seleccione la hora:</string>
+    <string name="horario">Horario</string>
+    <string name="dia_seleccionado">Día seleccionado:</string>
+    <string name="horario_seleccionado">Horario seleccionado:</string>
+    <string name="error_turno">Error Turno</string>
+    <string name="seleccione_el_auto">Seleccione el auto:</string>
 </resources>

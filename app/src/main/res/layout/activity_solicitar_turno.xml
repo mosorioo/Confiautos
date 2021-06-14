@@ -1,9 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SolicitarTurno">
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".SolicitarTurno">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtSeleccionarAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="222dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/seleccione_el_auto"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_autos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTurnoNuevo" />
+
+        <TextView
+            android:id="@+id/txtSeleccionarHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="222dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/seleccione_la_hora"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnHorario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCalendario" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="146dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="133dp"
+            android:layout_marginBottom="36dp"
+            android:contentDescription="@string/logoapp"
+            app:layout_constraintBottom_toTopOf="@+id/textTurnoNuevo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+
+        <TextView
+            android:id="@+id/textTurnoNuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="137dp"
+            android:layout_marginEnd="138dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/turno_nuevo"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtSeleccionarAuto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+        <Spinner
+            android:id="@+id/spinner_autos"
+            android:layout_width="200dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="24dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtSeleccionarDia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSeleccionarAuto" />
+
+        <TextView
+            android:id="@+id/txtSeleccionarDia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="233dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/dia"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnCalendario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_autos" />
+
+        <Button
+            android:id="@+id/btnCalendario"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="abrirCalendario"
+            android:text="@string/Calendario"
+            android:textSize="20sp"
+            app:backgroundTint="#D16C64"
+            app:layout_constraintBottom_toTopOf="@+id/txtSeleccionarHora"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSeleccionarDia" />
+
+        <Button
+            android:id="@+id/btnHorario"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="abrirHora"
+            android:text="@string/horario"
+            android:textSize="20sp"
+            app:backgroundTint="#D16C64"
+            app:layout_constraintBottom_toTopOf="@+id/textDia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSeleccionarHora" />
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginEnd="41dp"
+            android:layout_marginBottom="66dp"
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:onClick="onClick"
+            android:text="@string/confirmar"
+            android:textColor="#A62A2A"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnTurnoCancelar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno" />
+
+        <Button
+            android:id="@+id/btnTurnoCancelar"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="66dp"
+            android:layout_weight="1"
+            android:isScrollContainer="true"
+            android:onClick="onClick"
+            android:text="@string/cancelar"
+            android:textColor="#A62A2A"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmar"
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno"
+            app:layout_constraintVertical_bias="0.87" />
+
+        <TextView
+            android:id="@+id/textDia"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/dia_seleccionado"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textHora"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHorario" />
+
+        <TextView
+            android:id="@+id/txtErrorTurno"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
+            android:textColor="#DD0F0F"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnConfirmar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textHora" />
+
+        <TextView
+            android:id="@+id/textHora"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/horario_seleccionado"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtErrorTurno"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDia" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

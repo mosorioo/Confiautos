@@ -278,7 +278,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         pas.setText("");
         confpas.setText("");
         nom.setText("");
-       // ape.setText("");
         tel.setText("");
         email.setText("");
     }

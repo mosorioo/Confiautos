@@ -12,9 +12,9 @@ import com.hola.confiautos.entidades.Usuario;
 import com.hola.confiautos.services.DaoUsuario;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
-    Button btnTurnoNuevo, btnMisTurnos, btnNosotros, btnBeneficios, btnMisAutos, btnMiPerfil, btnSalir;
+    Button btnTurnoNuevo, btnMisTurnos, btnNosotros, btnMisAutos, btnMiPerfil, btnSalir;
     TextView nombre;
-    int id = 0; //para recuperar el id de usuario
+    //int id = 0; //para recuperar el id de usuario
     Usuario user;
     DaoUsuario dao = new DaoUsuario();
 
@@ -22,6 +22,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
+
         nombre = (TextView) findViewById(R.id.txtMisAutos);
         btnNosotros = (Button) findViewById((R.id.btnNosotros));
         btnTurnoNuevo = (Button) findViewById(R.id.btnTurnoNuevo);
@@ -31,7 +32,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
         user=dao.getUserbyID(getIntent().getIntExtra("Id",0), Inicio.this);
-       // if (user) // si es nulo...
         nombre.setText("Bienvenido/a " +user.getNombre());
 
     }
@@ -47,11 +47,17 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         startActivity(i);
     }
 
-    //Metodo para el boton MisAutos
-    public void MisAutos (View v) {
-        Intent i1 = new Intent(Inicio.this, MisAutos.class);
+    public void TurnoNuevo (View view) {
+        Intent i1 = new Intent(Inicio.this, SolicitarTurno.class);
         i1.putExtra("Id", user.getId());
         startActivity(i1);
+    }
+
+    //Metodo para el boton MisAutos
+    public void MisAutos (View v) {
+        Intent i2 = new Intent(Inicio.this, MisAutos.class);
+        i2.putExtra("Id", user.getId());
+        startActivity(i2);
     }
 
     //Metodo para el boton MiPerfil

@@ -70,6 +70,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="64dp"
             android:layout_marginBottom="8dp"
+            android:onClick="TurnoNuevo"
             android:text="@string/solicitar_turno"
             android:textColor="#CA1717"
             android:textColorHighlight="#BFB8B8"

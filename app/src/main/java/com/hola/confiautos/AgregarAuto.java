@@ -97,6 +97,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         campoNroMotor = findViewById(R.id.regNroMotor);
         campoNroChasis = findViewById(R.id.regNroChasis);
         fotoAuto = findViewById(R.id.imgRegFotoAuto);
+        errorDatos = findViewById(R.id.errorData);
 
         btnCargarFoto = findViewById(R.id.btnRegCargarFoto);
         btnTomarFoto = findViewById(R.id.btnRegTomarFoto);
@@ -106,36 +107,31 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         texIdUsuario = findViewById(R.id.idUsuario);
         texIdUsuario.setText(user.getId().toString());
 
-        //youtube
-        //para la galeria FUNCIONA
+        //para la galeria
         btnCargarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                        //cargarFotoGaleria();
                         abrirGaleria();
                     }else{
                         ActivityCompat.requestPermissions(AgregarAuto.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
                     }
                 }else{
-                    //cargarFotoGaleria();
                     abrirGaleria();
                 }
             }
 
         });
 
+        //para la camara
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirCamara();
-            }
-/*
+
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(ActivityCompat.checkSelfPermission(AgregarAuto.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-                        //Tomar foto;
                         abrirCamara();
                     }else{
                         ActivityCompat.requestPermissions(AgregarAuto.this, new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION_CODE);
@@ -143,16 +139,16 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 }else{
                     abrirCamara();
                 }
-            }*/
+            }
 
         });
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   if (validarCamposVacios()){
+                if (validarCamposVacios()){
                     guardarAuto();
-            /*    } else {
+                } /*else {
                     errorDatos.setVisibility(View.VISIBLE);
                     errorDatos.setText(error); } */
             }
@@ -171,7 +167,6 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
     }
 
     private void abrirGaleria() {
-
         useGallery=true;
         useCam=false;
         Intent i= new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -199,16 +194,16 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
                 }
     }
 
-        private File crearImagen () throws IOException {
+    private File crearImagen () throws IOException {
             String nombreImagen = "Foto_";
             File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);
             RUTA_IMAGEN = imagen.getAbsolutePath();
             return imagen;
-        }
+    }
 
-        @Override
-        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, Intent data){
             super.onActivityResult(requestCode, resultCode, data);
 
             if (useGallery) {
@@ -226,26 +221,24 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
 
                     if (imagenfile.exists()) {
                         imgToStorage = BitmapFactory.decodeFile(imagenfile.getAbsolutePath());
-
                         fotoAuto.setImageBitmap(imgToStorage);
                     }
                 }
             }
+    }
 
-        }
-        public String getRealPathFromURI (Uri uri){
+    public String getRealPathFromURI (Uri uri){
             String[] projection = {MediaStore.Images.Media.DATA};
             @SuppressWarnings("deprecation") Cursor cursor = managedQuery(uri, projection, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
-        }
+    }
 
-        private void guardarAuto () {
-
+    private void guardarAuto () {
             Auto auto = new Auto(user.getId().toString(), campoMarca.getText().toString(), campoModelo.getText().toString(), campoAnio.getText().toString(), campoNroMotor.getText().toString(), campoNroChasis.getText().toString(), RUTA_IMAGEN);
 
-            daoAuto.createAuto(auto, this);
+            daoAuto.createAuto(auto,this);
             imgToStorage = null;
             RUTA_IMAGEN = null;
             useGallery = false;
@@ -255,7 +248,7 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             intento.putExtra("Id", user.getId());
             startActivity(intento);
             onBackPressed();
-        }
+    }
 
     private boolean validarCamposVacios(){
         //FOTO?
@@ -266,21 +259,13 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         String nroChasis = campoNroChasis.getText().toString();
 
         if (!marca.equals("") && !modelo.equals("") && !anio.equals("") && !nroMotor.equals("") && !nroChasis.equals("")) {
-            if(nroMotor.length()==9){
-                return true;
-            } else{
-                error = "El nro de motor debe contener 9 dígitos.";
-                return false;
-            }
-           /* if(campoNroChasis.length()==12){
-                return true;
-            } else{
-                error = "El nro. de chasis debe contener 12 dígitos.";
-                return false;
-            }*/
+            return true;
         }else {
             error = "Todos los campos deben ser completados";
+            errorDatos.setVisibility(View.VISIBLE);
+            errorDatos.setText(error);
             return false;
         }
     }
+
 }
