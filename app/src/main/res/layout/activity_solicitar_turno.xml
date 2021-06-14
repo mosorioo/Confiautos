@@ -215,5 +215,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textDia" />
 
+        <TextView
+            android:id="@+id/txtTurnoConfirmado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="145dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="146dp"
+            android:text="Turnos Confirmado"
+            android:textColor="#4CAF50"
+            android:textColorHighlight="#F6F4F4"
+            android:textColorHint="#F6F4F4"
+            android:textColorLink="#F6F4F4"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnTurnoCancelar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

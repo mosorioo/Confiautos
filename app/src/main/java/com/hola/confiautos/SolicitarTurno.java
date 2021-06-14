@@ -127,6 +127,8 @@ public class SolicitarTurno extends AppCompatActivity {
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnCancelar = findViewById(R.id.btnTurnoCancelar);
 
+        confirmar = findViewById(R.id.txtTurnoConfirmado);
+
         conn=new ConexionSQLiteHelper(this,null,1);
 
         //dao=new daoUsuario(this);
@@ -203,9 +205,19 @@ public class SolicitarTurno extends AppCompatActivity {
             }
         });
 
+        //para solicitar los permisos de mensaje de texto
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 0);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 0);
+        }
+
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!formulario.getText().equals("") && !horario.getText().equals("")){
+                if(!formulario.getText().equals("") && !horario.getText().equals("")){ //agregar validacion seleccionar auto
                     if(errorFecha==true || errorHora==true){
                         String mensaje ="Seleccione datos correctos";
                         tiempo(mensaje);
@@ -270,8 +282,7 @@ public class SolicitarTurno extends AppCompatActivity {
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         fechaHoy = format.parse(fechaActual);
-        DatePickerDialog dpd= new DatePickerDialog(SolicitarTurno.this,
-                new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd= new DatePickerDialog(SolicitarTurno.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         anioSeleccionada=year;
@@ -311,7 +322,6 @@ public class SolicitarTurno extends AppCompatActivity {
         int hora= c.get(Calendar.HOUR_OF_DAY);
         int min= c.get(Calendar.MINUTE);
 
-
         String horaActual=(hora+1) + ":"+ min;//almaceno lahora de ahora
 
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -335,6 +345,7 @@ public class SolicitarTurno extends AppCompatActivity {
         }, hora, min,false);
         tmd.show();
     }
+
     void validarHora() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         java.util.Date horarioInicio=format.parse("09:00");
@@ -364,56 +375,58 @@ public class SolicitarTurno extends AppCompatActivity {
                     alert.dismiss();
                 }
             }
-        }, 2000);
+        }, 2000); //2 segundos
     }
 
     private void guardarTurno() {
 
-        /*new CountDownTimer(2000, 1000) {
+        new CountDownTimer(2000, 1000) {
             public void onTick(long millisUntilFinished) {
                 confirmar.setVisibility(View.VISIBLE);
             }
 
-            public void onFinish() {*/
-                SQLiteDatabase db = conn.getWritableDatabase();
+            public void onFinish() {
+                        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(SolicitarTurno.this, null, 1);
+                        SQLiteDatabase db = conn.getWritableDatabase();
 
-                Turno turno = new Turno(formulario.getText().toString(), horario.getText().toString(), auto.getId().toString(), user.getId().toString());
+                     //   Turno turno = new Turno(formulario.getText().toString(), horario.getText().toString(), auto.getId().toString(), user.getId().toString());
 
        // Turno turno = new Turno(formulario.getText().toString(), horario.getText().toString(), idAutoSeleccionado, user.getId().toString());
                 //turno.setId_auto(autoSeleccionado.getText().toString());
-                daoTurno.createTurno(turno, this);
-                //daoTurno.createTurno(turno, this);
+                        //daoTurno.createTurno(turno, this);
+               // daoTurno.createTurno(turno, this);
 
-               /* ContentValues values = new ContentValues();
+                        ContentValues values = new ContentValues();
 
-                values.put("fecha", formulario.getText().toString());//el valor que se asigne se guarda en la bd
-                values.put("horario", horario.getText().toString());
-                //values.put(autoSeleccionado.getText().toString());
-                values.put(Utilidades.CAMPO_ID_AUTO, Utilidades.autoLog);
-                values.put(Utilidades.CAMPO_ID_USUARIO, Utilidades.usuarioLog); */
-                //Long idresultante = db.insert("turnos", "id", values);
+                        values.put("fecha", formulario.getText().toString());//el valor que se asigne se guarda en la bd
+                        values.put("horario", horario.getText().toString());
+                        //values.put(idAutoSeleccionado.equals().toString());
+                        values.put(Utilidades.CAMPO_ID_AUTO, Utilidades.autoLog);
+                        values.put(Utilidades.CAMPO_ID_USUARIO, Utilidades.usuarioLog);
 
-                agregarEventoCalendario();
+                        Long idresultante = db.insert("turnos", "id", values);
 
-                Intent i = new Intent(SolicitarTurno.this, Inicio.class);
-                i.putExtra("Id", user.getId());
-                startActivity(i);
+                        agregarEventoCalendario();
 
-               /* if (idresultante>0){//si no lo llegó a guardar
-                    guardarTurno().setEnabled(false);//deshabilito para que no lo vuelva a poner
-                }
-                else{
-                    guardarTurno().setEnabled(true);
-                }*/
-                // finish();
+                        /*Intent i = new Intent(SolicitarTurno.this, Inicio.class);
+                        i.putExtra("Id", user.getId());
+                        startActivity(i);*/
 
-                String mensaje= "Turno agendado: " + formulario.getText().toString() +" "+ horario.getText().toString();
-                compartirSms(mensaje);
+                         /*if (idresultante>0){//si no lo llegó a guardar
+                            guardarTurno().setEnabled(false);//deshabilito para que no lo vuelva a poner
+                        } else{
+                            guardarTurno().setEnabled(true); }*/
+                        // finish();
+                        String mensaje= "Turno agendado: " + formulario.getText().toString() +" "+ horario.getText().toString();
+                        compartirSms(mensaje);
+                        Intent i1 = new Intent(SolicitarTurno.this, Inicio.class);
+                        i1.putExtra("Id", user.getId());
+                        startActivity(i1); //con esto va a Inicio
 
-        finish();
-            }
-       // } .start();
-  //  }
+                        finish(); // cuando lo ejecuto en el celular tengo que sacar este finish
+                    }
+                } .start();
+    }
 
     public void agregarEventoCalendario(){
         Intent calIntent = new Intent(Intent.ACTION_INSERT);//crea intento de insertar
