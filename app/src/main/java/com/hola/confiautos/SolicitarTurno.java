@@ -2,8 +2,6 @@ package com.hola.confiautos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -11,13 +9,10 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -30,20 +25,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import com.hola.confiautos.conexionSQLiteHelper.ConexionSQLiteHelper;
 import com.hola.confiautos.entidades.Auto;
@@ -67,32 +55,26 @@ public class SolicitarTurno extends AppCompatActivity {
 
     ConexionSQLiteHelper conn;
 
-    private View v;
-
     DaoUsuario dao = new DaoUsuario();
     Usuario user = new Usuario();
     Integer id = 0;
-    Intent x;
 
     TextView autoSelect, formulario, horario, confirmar;
     Button calendario, reloj;
-    TextView autoSeleccionado;
 
     Boolean errorAuto=false;
-    String idAutoSeleccionado;
-    Integer idAutoElegido;
 
     java.util.Date fechaSeleccionada;
     java.util.Date fechaHoy;
 
     Boolean errorFecha=false;
-    String fecha, campoAutoSeleccionado, campofecha, campoHora;
+    String fecha, campofecha, campoHora;
 
     java.util.Date horaSeleccionada;
     java.util.Date horaAhora;
     Boolean errorHora=false;
     String hora1;
-    boolean mismoDia=false;
+    //boolean mismoDia=false;
 
     //variables para guardar calendario
     int anio=0;
@@ -106,7 +88,7 @@ public class SolicitarTurno extends AppCompatActivity {
     int horaParaCal=0;
     int minParaCal=0;
 
-    DaoAuto daoAuto = new DaoAuto();
+    //DaoAuto daoAuto = new DaoAuto();
     Auto auto = new Auto();
 
     DaoTurno daoTurno = new DaoTurno();
@@ -122,17 +104,13 @@ public class SolicitarTurno extends AppCompatActivity {
         horario = (TextView) findViewById(R.id.textHora);
         reloj = (Button) findViewById(R.id.btnHorario);
         reloj.setEnabled(false);
-
         comboAutos = findViewById(R.id.spinner_autos);
-
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnCancelar = findViewById(R.id.btnTurnoCancelar);
-
         confirmar = findViewById(R.id.txtTurnoConfirmado);
 
         conn=new ConexionSQLiteHelper(this,null,1);
 
-        //dao=new daoUsuario(this);
         user = dao.getUserbyID(getIntent().getIntExtra("Id", 0), SolicitarTurno.this);
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
@@ -147,12 +125,8 @@ public class SolicitarTurno extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Integer autoSeleccionado1=0;
                 if (position != 0) {
-                    //autoSeleccionado1.setText(autosList.get(position-1).getId());
                     autoSeleccionado1.equals(autosList.get(position-1).getId());
                     autoSelect.setText("Auto seleccionado: "+autosList.get(position-1).getId()+" - "+autosList.get(position-1).getMarca()+ " "+autosList.get(position-1).getModelo());
-                    //idAutoSeleccionado = autoSeleccionado1.getText().toString();
-                    //idAutoElegido = Integer.parseInt(idAutoSeleccionado);
-                   // auto.setId(idAutoElegido);
                     auto.setId(autoSeleccionado1);
                     errorAuto=true;
                     calendario.setEnabled(true);
@@ -216,7 +190,6 @@ public class SolicitarTurno extends AppCompatActivity {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!autoSelect.getText().equals("") && !formulario.getText().equals("") && !horario.getText().equals("")){
-                //if(!campoAutoSeleccionado.equals("") && !campofecha.equals("") && !campoHora.equals("")){
                     if(errorFecha==true || errorHora==true){
                         String mensaje ="Seleccione datos correctos";
                         tiempo(mensaje);
@@ -391,16 +364,8 @@ public class SolicitarTurno extends AppCompatActivity {
                         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(SolicitarTurno.this, null, 1);
                         SQLiteDatabase db = conn.getWritableDatabase();
 
-                      //  Turno turno = new Turno(formulario.getText().toString(), horario.getText().toString(), auto.getId().toString(), user.getId().toString());
-
-                Turno turno = new Turno(campofecha, campoHora, auto.getId().toString(), user.getId().toString());
-
-
-                // Turno turno = new Turno(formulario.getText().toString(), horario.getText().toString(), idAutoSeleccionado, user.getId().toString());
-                //turno.setId_auto(autoSeleccionado.getText().toString());
+                        Turno turno = new Turno(campofecha, campoHora, auto.getId().toString(), user.getId().toString());
                         daoTurno.createTurno(turno, SolicitarTurno.this);
-               // daoTurno.createTurno(turno, this);
-
                       /*  ContentValues values = new ContentValues();
 
                         values.put("fecha", formulario.getText().toString());//el valor que se asigne se guarda en la bd
@@ -413,27 +378,16 @@ public class SolicitarTurno extends AppCompatActivity {
 
                         agregarEventoCalendario();
 
-                        /*Intent i = new Intent(SolicitarTurno.this, Inicio.class);
-                        i.putExtra("Id", user.getId());
-                        startActivity(i);*/
+                String mensajeShare= "Turno agendado en Confiautos:\n " +autoSelect.getText().toString() +" \n"+ formulario.getText().toString() +" \n"+ horario.getText().toString();
+                compartirSms(mensajeShare);
 
-                       /* if (idresultante>0){//si no lo llegó a guardar
-                            btnConfirmar.setEnabled(false);//deshabilito para que no lo vuelva a poner
-                        } else{ */
-
-                          //  btnConfirmar.setEnabled(true); }
-                        // finish();
-                        String mensaje= "Turno agendado: " +autoSeleccionado.getText().toString() +" "+ formulario.getText().toString() +" "+ horario.getText().toString();
-                        compartirSms(mensaje);
-
-                        //Intent i1 = new Intent(SolicitarTurno.this, Inicio.class);
-                       // i1.putExtra("Id", user.getId());
-                       // startActivity(i1); //con esto va a Inicio
-
-                        //finish(); // cuando lo ejecuto en el celular tengo que sacar este finish
                     }
                 } .start();
-        limpiarCampos();
+        Intent i = new Intent(SolicitarTurno.this, Inicio.class);
+        i.putExtra("Id", user.getId());
+        startActivity(i);
+        finish();
+
     }
 
     public void agregarEventoCalendario(){
