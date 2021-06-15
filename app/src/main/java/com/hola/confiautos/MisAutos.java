@@ -64,13 +64,9 @@ public class MisAutos extends AppCompatActivity implements View.OnClickListener 
         mListView.setAdapter(mAdapter);
 
         btnAgregar = findViewById(R.id.btnAgregarAuto);
-       // btnModificar = findViewById(R.id.btnModificarAuto);
         btnEliminar = findViewById(R.id.btnEliminarAuto);
         btnVolv = findViewById(R.id.btnMisAutosVolver);
         //dao=new daoUsuario(this);
-
-        texIdUsuario = findViewById(R.id.idUsuarioAuto);
-        texIdUsuario.setText(user.getId().toString());
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override

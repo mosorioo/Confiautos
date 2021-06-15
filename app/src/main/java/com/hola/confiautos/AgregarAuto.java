@@ -104,9 +104,6 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnRegAutoGuardar);
         btnCancelar = findViewById(R.id.btnRegAutoCancelar);
 
-        texIdUsuario = findViewById(R.id.idUsuario);
-        texIdUsuario.setText(user.getId().toString());
-
         //para la galeria
         btnCargarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,15 +180,13 @@ public class AgregarAuto<onActivityResult> extends AppCompatActivity {
             File imagenArchivo = null;
             try {
                 imagenArchivo = crearImagen();
-            } catch (IOException ex) {
-                Log.e("Error", ex.toString());}
-
                 if (imagenArchivo != null) {
                     imagenUri = FileProvider.getUriForFile(this, "com.hola.confiautos.fileprovider", imagenArchivo);
-
                     i.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
                     startActivityForResult(i, TOMAR_FOTO);
                 }
+            } catch (IOException ex) {
+                Log.e("Error", ex.toString());}
     }
 
     private File crearImagen () throws IOException {

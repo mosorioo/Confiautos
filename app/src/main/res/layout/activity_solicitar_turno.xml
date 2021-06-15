@@ -117,12 +117,12 @@
             android:layout_height="60dp"
             android:layout_marginStart="105dp"
             android:layout_marginEnd="106dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:onClick="abrirHora"
             android:text="@string/horario"
             android:textSize="20sp"
             app:backgroundTint="#D16C64"
-            app:layout_constraintBottom_toTopOf="@+id/textDia"
+            app:layout_constraintBottom_toTopOf="@+id/textAutoSeleccionado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSeleccionarHora" />
@@ -137,34 +137,28 @@
             android:layout_marginBottom="66dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
-            android:onClick="onClick"
             android:text="@string/confirmar"
             android:textColor="#A62A2A"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnTurnoCancelar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnTurnoCancelar"
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:layout_margin="20dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="51dp"
             android:layout_marginBottom="66dp"
             android:layout_weight="1"
             android:isScrollContainer="true"
-            android:onClick="onClick"
             android:text="@string/cancelar"
             android:textColor="#A62A2A"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnConfirmar"
-            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno"
-            app:layout_constraintVertical_bias="0.87" />
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmar" />
 
         <TextView
             android:id="@+id/textDia"
@@ -172,32 +166,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/dia_seleccionado"
+            android:layout_marginBottom="8dp"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/textHora"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnHorario" />
+            app:layout_constraintTop_toBottomOf="@+id/textAutoSeleccionado" />
 
         <TextView
-            android:id="@+id/txtErrorTurno"
+            android:id="@+id/textAutoSeleccionado"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="8dp"
             android:textAlignment="center"
-            android:textColor="#DD0F0F"
-            android:textSize="20sp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btnConfirmar"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textDia"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textHora" />
+            app:layout_constraintTop_toBottomOf="@+id/btnHorario" />
 
         <TextView
             android:id="@+id/textHora"
@@ -205,13 +195,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/horario_seleccionado"
+            android:layout_marginBottom="8dp"
             android:textAlignment="center"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtErrorTurno"
+            app:layout_constraintBottom_toTopOf="@+id/txtTurnoConfirmado"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textDia" />
 
@@ -220,9 +209,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="145dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="146dp"
-            android:text="Turnos Confirmado"
+            android:layout_marginBottom="4dp"
+            android:text="@string/turnos_confirmado"
             android:textColor="#4CAF50"
             android:textColorHighlight="#F6F4F4"
             android:textColorHint="#F6F4F4"
@@ -230,8 +219,9 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btnTurnoCancelar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtErrorTurno" />
+            app:layout_constraintTop_toBottomOf="@+id/textHora" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

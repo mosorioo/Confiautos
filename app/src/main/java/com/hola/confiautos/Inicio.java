@@ -26,7 +26,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         nombre = (TextView) findViewById(R.id.txtMisAutos);
         btnNosotros = (Button) findViewById((R.id.btnNosotros));
         btnTurnoNuevo = (Button) findViewById(R.id.btnTurnoNuevo);
-        btnMisTurnos = (Button) findViewById(R.id.btnMisTurnos);
         btnMisAutos = (Button) findViewById((R.id.btnMisAutos));
         btnMiPerfil = (Button) findViewById((R.id.btnMiPerfil));
         btnSalir = (Button) findViewById((R.id.btnSalir));

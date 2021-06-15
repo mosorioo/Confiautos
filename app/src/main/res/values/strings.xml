@@ -87,4 +87,6 @@
     <string name="horario_seleccionado">Horario seleccionado:</string>
     <string name="error_turno">Error Turno</string>
     <string name="seleccione_el_auto">Seleccione el auto:</string>
+    <string name="auto_seleccionado">Auto seleccionado:</string>
+    <string name="turnos_confirmado">Turnos Confirmado</string>
 </resources>

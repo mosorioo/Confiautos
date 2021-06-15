@@ -32,8 +32,6 @@ public class Utilidades {
     //public static final String CAMPO_ID_AUTO="autoSeleccionado";
     public static final String CAMPO_ID_USUARIO="id_usuario";
 
-
-
     public static Integer usuarioLog;
     public static Integer autoLog;
 

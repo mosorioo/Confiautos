@@ -78,6 +78,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="69dp"
         android:text="@string/eliminar"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnMisAutosVolver"
@@ -107,20 +108,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIndicaciones" />
-
-    <TextView
-        android:id="@+id/idUsuarioAuto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="127dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="75dp"
-        android:text="@string/bienvenido_usuario"
-        app:layout_constraintBottom_toTopOf="@+id/txtIndicaciones"
-        app:layout_constraintEnd_toStartOf="@+id/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
